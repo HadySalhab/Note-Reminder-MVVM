@@ -6,15 +6,6 @@
     <data>
 
     </data>
-
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/notes_list_coordinator_layout"
-        android:fitsSystemWindows="true"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/notes_container_layout"
             android:layout_width="match_parent"
@@ -42,7 +33,9 @@
                 android:layout_marginRight="@dimen/list_item_padding"
                 android:layout_marginBottom="@dimen/medium_margin"
                 android:gravity="center_vertical"
-                android:textAppearance="?attr/textAppearanceHeadline4" />
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                tools:text="COMPLETE TASKS"
+                />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_marginStart="@dimen/medium_margin"
@@ -66,9 +59,10 @@
 
                 <ImageView
                     android:id="@+id/no_tasks_icon"
-                    android:layout_width="96dp"
-                    android:layout_height="96dp"
+                    android:layout_width="@dimen/empty_notes_reminder_image_dimens"
+                    android:layout_height="@dimen/empty_notes_reminder_image_dimens"
                     android:layout_gravity="center"
+                    app:srcCompat="@drawable/no_notes_logo"
                     android:contentDescription="@string/no_tasks_image_content_description" />
 
                 <TextView
@@ -76,19 +70,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="@dimen/list_item_padding" />
+                    android:layout_marginBottom="@dimen/list_item_padding"
+                    android:text="@string/no_notes_text_placeholder"
+                    />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/add_note_fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/medium_margin"
-            app:srcCompat="@drawable/ic_add"
-            android:layout_gravity="end|bottom"
-            />
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-
 </layout>
