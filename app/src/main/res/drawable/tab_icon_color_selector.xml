@@ -17,5 +17,5 @@
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:color="?attr/colorSecondary" android:state_activated="true" /> <!-- activated -->
-    <item android:color="?attr/colorPrimaryDark"/> <!-- default -->
+    <item android:color="@color/surfaceTextColor"/> <!-- default -->
 </selector>
