@@ -19,7 +19,7 @@ class NotesListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notes, container, false)
+        return inflater.inflate(R.layout.fragment_notes_list, container, false)
     }
 
 
