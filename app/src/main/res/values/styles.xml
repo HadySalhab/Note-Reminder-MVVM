@@ -15,4 +15,18 @@
         <item name="colorSecondaryVariant">@color/secondaryLightColor</item>
     </style>
 
+    <style name="Theme.Todo" parent="Base.Theme.Todo" />
+    <style name="Theme.Todo.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.Todo.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.ActionBar"/>
+
+    <style name="Theme.Todo.Toolbar.Text" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="fontFamily">@font/lobster_two_italic</item>
+        <item name="android:fontFamily">@font/lobster_two_italic</item>
+        <item name="android:color">?attr/colorOnPrimary</item>
+    </style>
+
+
 </resources>
