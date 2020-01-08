@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_todo">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_todo"
+    app:startDestination="@id/home_view_pager_fragment">
 
+    <fragment
+        android:id="@+id/home_view_pager_fragment"
+        android:name="com.android.myapplication.todo.ui.HomeViewPagerFragment"
+        android:label="HomeViewPagerFragment"
+        tools:layout="@layout/fragment_home_view_pager"
+
+        />
 </navigation>
