@@ -6,4 +6,6 @@
 
 
     <string name="no_tasks_image_content_description">No tasks image</string>
+    <string name="no_notes_text_placeholder">You Have No Notes Added</string>
+    <string name="no_reminders_text_placeholder">You Have No Reminders Added</string>
 </resources>
