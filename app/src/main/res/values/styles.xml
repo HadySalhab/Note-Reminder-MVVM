@@ -13,7 +13,9 @@
         <item name="colorAccent">@color/primaryDarkColor</item>
         <item name="colorPrimaryVariant">@color/primaryLightColor</item>
         <item name="colorSecondaryVariant">@color/secondaryLightColor</item>
+        <item name="editTextStyle">@style/Widget.Todo.EditText</item>
     </style>
+
 
     <style name="Theme.Todo" parent="Base.Theme.Todo" />
     <style name="Theme.Todo.NoActionBar">
@@ -28,5 +30,7 @@
         <item name="android:color">?attr/colorOnPrimary</item>
     </style>
 
-
+<style name="Widget.Todo.EditText" parent="Widget.AppCompat.EditText">
+    <item name="android:background">@null</item>
+</style>
 </resources>
