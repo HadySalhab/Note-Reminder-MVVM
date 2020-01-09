@@ -3,13 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_todo"
-    app:startDestination="@id/home_view_pager_fragment">
+    app:startDestination="@id/homeViewPagerFragment">
 
     <fragment
-        android:id="@+id/home_view_pager_fragment"
+        android:id="@+id/homeViewPagerFragment"
         android:name="com.android.myapplication.todo.ui.HomeViewPagerFragment"
         android:label="HomeViewPagerFragment"
         tools:layout="@layout/fragment_home_view_pager"
 
+        >
+        <action
+            android:id="@+id/action_homeViewPagerFragment_to_notesEditFragment"
+            app:destination="@id/notesEditFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notesEditFragment"
+        android:name="com.android.myapplication.todo.ui.NotesEditFragment"
+        android:label="NotesEditFragment"
+        tools:layout="@layout/fragment_notes_edit"
         />
 </navigation>
