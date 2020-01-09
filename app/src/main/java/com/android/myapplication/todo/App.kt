@@ -24,7 +24,7 @@ class App :Application(){
 
         viewModel { HomeViewPagerViewModel() }
 
-
+        viewModel { NotesListViewModel(get(),this@App) }
 
     }
 

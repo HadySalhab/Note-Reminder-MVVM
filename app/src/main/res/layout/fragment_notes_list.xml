@@ -4,6 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="com.android.myapplication.todo.ui.list.NotesListViewModel" />
 
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,6 +19,7 @@
             android:focusable="true">
 
         <LinearLayout
+            android:visibility="@{viewModel.notes!=null ? View.VISIBLE : View.GONE}"
             android:id="@+id/notes_linear_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -34,13 +39,13 @@
                 android:layout_marginBottom="@dimen/medium_margin"
                 android:gravity="center_vertical"
                 android:textAppearance="?attr/textAppearanceHeadline6"
-                tools:text="COMPLETE TASKS"
+                android:text="@{viewModel.category}"
+                tools:text="All Notes"
                 />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_marginStart="@dimen/medium_margin"
-                android:layout_marginEnd="@dimen/medium_margin"
                 android:id="@+id/notes_list"
+                app:notesList="@{viewModel.notes}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
@@ -51,6 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:visibility="@{viewModel.notes==null ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +68,8 @@
                     android:layout_width="@dimen/empty_notes_reminder_image_dimens"
                     android:layout_height="@dimen/empty_notes_reminder_image_dimens"
                     android:layout_gravity="center"
-                    app:srcCompat="@drawable/no_notes_logo"
+                    tools:srcCompat="@drawable/no_favorite_notes"
+                    app:placeHolder="@{viewModel.imagePlaceHolder}"
                     android:contentDescription="@string/no_tasks_image_content_description" />
 
                 <TextView
@@ -71,7 +78,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginBottom="@dimen/list_item_padding"
-                    android:text="@string/no_notes_text_placeholder"
+                    android:text="@{viewModel.textPlaceHolder}"
+                    tools:text="@string/no_favorite_notes_text_placeholder"
                     />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
