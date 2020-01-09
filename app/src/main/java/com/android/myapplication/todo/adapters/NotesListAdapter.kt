@@ -19,6 +19,8 @@ class NotesListAdapter ( val onCheckEventListener: (Notes) -> Unit, val onNoteCl
             }
         }
         fun bind(note:Notes){
+            binding.note = note
+            binding.viewHolder = this
 
         }
     }
