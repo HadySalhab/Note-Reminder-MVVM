@@ -2,7 +2,9 @@ package com.android.myapplication.todo
 
 import android.app.Application
 import com.android.myapplication.todo.data.db.NotesDataBase
+import com.android.myapplication.todo.repositories.NotesRepository
 import com.android.myapplication.todo.ui.HomeViewPagerViewModel
+import com.android.myapplication.todo.ui.list.NotesListViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -15,7 +17,14 @@ class App :Application(){
             //Database
             NotesDataBase.getInstance(androidContext())
         }
+        single{
+            val noteDb:NotesDataBase = get()
+            NotesRepository(noteDb.notesDao)
+        }
+
         viewModel { HomeViewPagerViewModel() }
+
+
 
     }
 
