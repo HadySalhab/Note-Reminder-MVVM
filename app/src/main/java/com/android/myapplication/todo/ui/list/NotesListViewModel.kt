@@ -3,8 +3,10 @@ package com.android.myapplication.todo.ui.list
 import android.app.Application
 import androidx.lifecycle.*
 import com.android.myapplication.todo.R
+import com.android.myapplication.todo.data.Notes
 import com.android.myapplication.todo.repositories.NotesRepository
 import com.android.myapplication.todo.util.Filter
+import kotlinx.coroutines.launch
 
 
 class NotesListViewModel(private val notesRepository: NotesRepository,val app:Application) : AndroidViewModel(app){
@@ -62,5 +64,12 @@ class NotesListViewModel(private val notesRepository: NotesRepository,val app:Ap
             }
         }
     }
+
+    fun updateNote(note: Notes){
+        viewModelScope.launch {
+            notesRepository.update(note)
+        }
+    }
+
 
 }
