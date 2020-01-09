@@ -59,7 +59,7 @@ class HomeViewPagerFragment : Fragment() {
                 NOTES_LIST_PAGE_INDEX-> {
                     val note = Notes()
                     viewPagerViewModel.insert(note)
-                    val action = HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToNotesEditFragment()
+                    val action = HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToNotesEditFragment(note.id)
                     findNavController().navigate(action)
                 }
 
