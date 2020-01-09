@@ -1,22 +1,16 @@
 package com.android.myapplication.todo.ui.list
 
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.viewpager2.widget.ViewPager2
-import com.android.myapplication.todo.R
 import com.android.myapplication.todo.adapters.NotesListAdapter
 import com.android.myapplication.todo.data.Notes
-
 import com.android.myapplication.todo.databinding.FragmentNotesListBinding
-import com.android.myapplication.todo.ui.HomeViewPagerFragment
-import org.koin.android.ext.android.bind
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -32,7 +26,8 @@ class NotesListFragment : Fragment() {
         viewModel.updateNote(note)
     }
     private val onNoteClickListener: (Notes) -> Unit = { note ->
-        //navigate to display
+        val action = NotesListFragmentDirections.actionNotesListFragmentToNotesDisplayFragment(note.id)
+        findNavController().navigate(action)
     }
     private lateinit var noteAdapter: NotesListAdapter
 
