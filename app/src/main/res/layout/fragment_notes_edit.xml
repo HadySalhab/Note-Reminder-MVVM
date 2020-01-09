@@ -64,6 +64,18 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_end="16dp" />
 
+            <TextView
+                android:id="@+id/edit_note_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                app:layout_constraintStart_toStartOf="@+id/guideline_start"
+                app:layout_constraintTop_toBottomOf="@id/edit_note_imageView"
+                tools:text="Created: 9/01/2020"
+
+                />
+
 
                 <EditText
                     android:id="@+id/editText_title"
@@ -71,9 +83,10 @@
                     android:layout_height="wrap_content"
                     android:inputType="text"
                     android:maxLines="1"
+                    android:hint="Title..."
                     app:layout_constraintEnd_toEndOf="@id/guideline_end"
                     app:layout_constraintStart_toStartOf="@+id/guideline_start"
-                    app:layout_constraintTop_toBottomOf="@id/edit_note_imageView"
+                    app:layout_constraintTop_toBottomOf="@id/edit_note_date"
                     android:textAppearance="?attr/textAppearanceHeadline6"
                     tools:text="A day in Maroubra"
                     />
@@ -93,6 +106,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                    android:hint="Description..."
                     tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
                     />
