@@ -4,6 +4,8 @@ import android.app.Application
 import com.android.myapplication.todo.data.db.NotesDataBase
 import com.android.myapplication.todo.repositories.NotesRepository
 import com.android.myapplication.todo.ui.HomeViewPagerViewModel
+import com.android.myapplication.todo.ui.display.NotesDisplayViewModel
+import com.android.myapplication.todo.ui.edit.NotesEditViewModel
 import com.android.myapplication.todo.ui.list.NotesListViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -28,6 +30,12 @@ class App :Application(){
 
         viewModel {
             NotesListViewModel(get(),this@App)
+        }
+        viewModel {
+            (noteId:Int)-> NotesDisplayViewModel(get(),noteId)
+        }
+        viewModel {
+            (noteId:Int)->NotesEditViewModel(get(),noteId)
         }
 
     }
