@@ -8,14 +8,14 @@ import com.android.myapplication.todo.data.Notes
 interface NotesDao{
 
     /*Room automatically handle liveData on a background thread*/
-    @Query("SELECT * FROM notes")
+    @Query("SELECT * FROM notes ORDER BY id DESC")
     fun getNotes():LiveData<Notes>
 
-    @Query("SELECT * FROM notes WHERE favorite= 1")
+    @Query("SELECT * FROM notes WHERE favorite= 1 ORDER BY id DESC")
     fun getFavoriteNotes():LiveData<Notes>
 
-    @Query("SELECT * FROM notes WHERE noteId = :noteId")
-    suspend fun getNoteById(noteId:String):Notes?
+    @Query("SELECT * FROM notes WHERE id = :noteId")
+    suspend fun getNoteById(noteId:Int):Notes?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNote(note:Notes)
@@ -23,8 +23,8 @@ interface NotesDao{
     @Update
     suspend fun updateNote(note:Notes)
 
-    @Query("DELETE FROM notes WHERE noteId = :noteId")
-    suspend fun deleteNoteById(noteId: String)
+    @Delete
+    suspend fun delete(note:Notes)
 
     @Query("DELETE FROM notes")
     suspend fun clearAllNotes()
