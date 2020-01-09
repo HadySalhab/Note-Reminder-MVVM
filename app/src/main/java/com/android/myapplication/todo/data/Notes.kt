@@ -8,7 +8,7 @@ import java.util.*
 
 @Entity(tableName = "notes")
 data class Notes(
-    @PrimaryKey @ColumnInfo(name = "noteId") var id: String = UUID.randomUUID().toString(),
+    @PrimaryKey(autoGenerate = true) val id: Int,
     @ColumnInfo(name = "title") var title: String = "",
     @ColumnInfo(name = "description") var description: String = "",
     @ColumnInfo(name = "date") var date:String="",
