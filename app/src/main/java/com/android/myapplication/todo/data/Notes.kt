@@ -11,6 +11,7 @@ data class Notes(
     @PrimaryKey @ColumnInfo(name = "noteId") var id: String = UUID.randomUUID().toString(),
     @ColumnInfo(name = "title") var title: String = "",
     @ColumnInfo(name = "description") var description: String = "",
+    @ColumnInfo(name = "date") var date:String="",
     @ColumnInfo(name = "favorite") var isFavorite:Boolean = false
 ){
     val titleForNoteList:String
