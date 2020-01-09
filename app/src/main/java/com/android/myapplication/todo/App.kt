@@ -13,14 +13,14 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
 
-class App :Application(){
-    private val koinModule= module{
+class App : Application() {
+    private val koinModule = module {
         single {
             //Database
             NotesDataBase.getInstance(androidContext())
         }
-        single{
-            val noteDb:NotesDataBase = get()
+        single {
+            val noteDb: NotesDataBase = get()
             NotesRepository(noteDb.notesDao)
         }
 
@@ -29,13 +29,13 @@ class App :Application(){
         }
 
         viewModel {
-            NotesListViewModel(get(),this@App)
+            NotesListViewModel(get(), this@App)
         }
-        viewModel {
-            (noteId:Int)-> NotesDisplayViewModel(get(),noteId)
+        viewModel { (noteId: Int) ->
+            NotesDisplayViewModel(get(), noteId)
         }
-        viewModel {
-            (noteId:Int)->NotesEditViewModel(get(),noteId)
+        viewModel { (noteId: Int) ->
+            NotesEditViewModel(get(), noteId)
         }
 
     }
