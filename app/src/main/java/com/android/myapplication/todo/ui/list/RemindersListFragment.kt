@@ -1,4 +1,4 @@
-package com.android.myapplication.todo.ui
+package com.android.myapplication.todo.ui.list
 
 
 import android.os.Bundle
