@@ -20,11 +20,32 @@
         android:name="com.android.myapplication.todo.ui.edit.NotesEditFragment"
         android:label="NotesEditFragment"
         tools:layout="@layout/fragment_notes_edit"
-        />
+        >
+        <argument
+            android:name="noteId"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/notesDisplayFragment"
         android:name="com.android.myapplication.todo.ui.display.NotesDisplayFragment"
         android:label="NotesDisplayFragment"
         tools:layout="@layout/fragment_notes_display"
-        />
+        >
+        <action
+            android:id="@+id/action_notesDisplayFragment_to_notesEditFragment"
+            app:destination="@id/notesEditFragment" />
+        <argument
+            android:name="noteId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/notesListFragment"
+        android:name="com.android.myapplication.todo.ui.list.NotesListFragment"
+        android:label="NotesListFragment"
+        tools:layout="@layout/fragment_notes_list"
+        >
+        <action
+            android:id="@+id/action_notesListFragment_to_notesDisplayFragment"
+            app:destination="@id/notesDisplayFragment" />
+    </fragment>
 </navigation>
