@@ -14,7 +14,7 @@
             android:layout_height="match_parent">
 
             <com.google.android.material.appbar.AppBarLayout
-                android:id="@+id/edit_note_appbarLayout"
+                android:id="@+id/display_appbarLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -22,7 +22,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/edit_note_toolbar"
+                    android:id="@+id/display_toolbar"
                     style="@style/Widget.MaterialComponents.Toolbar.Primary"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize">
@@ -38,18 +38,18 @@
             </com.google.android.material.appbar.AppBarLayout>
 
             <ImageView
-                android:id="@+id/ic_favorite"
+                android:id="@+id/display_ic_favorite"
                 app:srcCompat="@drawable/ic_favorite_inactive"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_note_appbarLayout"
+                app:layout_constraintTop_toBottomOf="@+id/display_appbarLayout"
                 />
 
 
             <ImageView
-                android:id="@+id/edit_note_imageView"
+                android:id="@+id/display_note_image"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:visibility="gone"
@@ -57,7 +57,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ic_favorite" />
+                app:layout_constraintTop_toBottomOf="@+id/display_ic_favorite" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline_start"
@@ -73,26 +73,25 @@
                 app:layout_constraintGuide_end="16dp" />
 
             <TextView
-                android:id="@+id/edit_note_date"
+                android:id="@+id/display_date"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 app:layout_constraintEnd_toEndOf="@id/guideline_end"
                 app:layout_constraintStart_toStartOf="@+id/guideline_start"
-                app:layout_constraintTop_toBottomOf="@id/edit_note_imageView"
+                app:layout_constraintTop_toBottomOf="@id/display_note_image"
                 tools:text="9/01/2020"
 
                 />
 
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/editText_title"
+                android:id="@+id/display_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:maxLines="1"
                 app:layout_constraintEnd_toEndOf="@id/guideline_end"
                 app:layout_constraintStart_toStartOf="@+id/guideline_start"
-                app:layout_constraintTop_toBottomOf="@id/edit_note_date"
+                app:layout_constraintTop_toBottomOf="@id/display_date"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 tools:text="A day in Maroubra"
                 />
@@ -104,10 +103,10 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/guideline_end"
                 app:layout_constraintStart_toStartOf="@+id/guideline_start"
-                app:layout_constraintTop_toBottomOf="@id/editText_title">
+                app:layout_constraintTop_toBottomOf="@id/display_title">
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/editText_description"
+                    android:id="@+id/display_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
