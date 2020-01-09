@@ -14,6 +14,7 @@ import com.android.myapplication.todo.R
 import com.android.myapplication.todo.adapters.DailyNotePagerAdapter
 import com.android.myapplication.todo.adapters.NOTES_LIST_PAGE_INDEX
 import com.android.myapplication.todo.adapters.REMINDERS_LIST_PAGE_INDEX
+import com.android.myapplication.todo.data.Notes
 import com.android.myapplication.todo.databinding.FragmentHomeViewPagerBinding
 import com.android.myapplication.todo.util.EventObserver
 import com.google.android.material.tabs.TabLayout
@@ -28,6 +29,7 @@ class HomeViewPagerFragment : Fragment() {
     private lateinit var tabLayout:TabLayout
     private lateinit var viewPager:ViewPager2
     private val viewPagerViewModel:HomeViewPagerViewModel by viewModel()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,9 +56,10 @@ class HomeViewPagerFragment : Fragment() {
     fun setupFabNavigation(){
         viewPagerViewModel.fabNavListenner.observe(viewLifecycleOwner,EventObserver{
             when(viewPager.currentItem){
-                0-> {
-                    val action =
-                        HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToNotesEditFragment()
+                NOTES_LIST_PAGE_INDEX-> {
+                    val note = Notes()
+                    viewPagerViewModel.insert(note)
+                    val action = HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToNotesEditFragment()
                     findNavController().navigate(action)
                 }
 

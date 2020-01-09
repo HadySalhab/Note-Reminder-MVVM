@@ -22,9 +22,13 @@ class App :Application(){
             NotesRepository(noteDb.notesDao)
         }
 
-        viewModel { HomeViewPagerViewModel() }
+        viewModel {
+            HomeViewPagerViewModel(get())
+        }
 
-        viewModel { NotesListViewModel(get(),this@App) }
+        viewModel {
+            NotesListViewModel(get(),this@App)
+        }
 
     }
 
