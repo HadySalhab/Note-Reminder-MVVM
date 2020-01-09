@@ -16,7 +16,7 @@
             android:layout_height="match_parent">
 
             <com.google.android.material.appbar.AppBarLayout
-                android:id="@+id/edit_note_appbarLayout"
+                android:id="@+id/edit_appbarLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -24,7 +24,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/edit_note_toolbar"
+                    android:id="@+id/edit_toolbar"
                     style="@style/Widget.MaterialComponents.Toolbar.Primary"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize">
@@ -40,18 +40,18 @@
             </com.google.android.material.appbar.AppBarLayout>
 
             <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/ic_favorite"
+                android:id="@+id/edit_ic_favorite"
                 android:button="@drawable/ic_favorite_selector"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_note_appbarLayout"
+                app:layout_constraintTop_toBottomOf="@+id/edit_appbarLayout"
                 />
 
 
             <ImageView
-                android:id="@+id/edit_note_imageView"
+                android:id="@+id/edit_note_image"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:visibility="gone"
@@ -59,7 +59,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ic_favorite" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_ic_favorite" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline_start"
@@ -81,19 +81,19 @@
                 android:gravity="end"
                 app:layout_constraintEnd_toEndOf="@id/guideline_end"
                 app:layout_constraintStart_toStartOf="@+id/guideline_start"
-                app:layout_constraintTop_toBottomOf="@id/edit_note_imageView"
+                app:layout_constraintTop_toBottomOf="@id/edit_note_image"
                 tools:text="Created: 9/01/2020"
 
                 />
 
 
                 <EditText
-                    android:id="@+id/editText_title"
+                    android:id="@+id/edit_title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:maxLines="1"
+                    android:inputType="textPersonName"
                     android:hint="Title..."
+                    android:ems="10"
                     app:layout_constraintEnd_toEndOf="@id/guideline_end"
                     app:layout_constraintStart_toStartOf="@+id/guideline_start"
                     app:layout_constraintTop_toBottomOf="@id/edit_note_date"
@@ -108,16 +108,17 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/guideline_end"
                 app:layout_constraintStart_toStartOf="@+id/guideline_start"
-                app:layout_constraintTop_toBottomOf="@id/editText_title">
+                app:layout_constraintTop_toBottomOf="@id/edit_title">
 
                 <EditText
                     android:background="null"
-                    android:id="@+id/editText_description"
+                    android:id="@+id/edit_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                     android:hint="Description..."
+                    android:ems="10"
                     tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
                     />
 
