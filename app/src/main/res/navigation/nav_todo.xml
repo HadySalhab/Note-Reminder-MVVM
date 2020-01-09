@@ -10,7 +10,6 @@
         android:name="com.android.myapplication.todo.ui.HomeViewPagerFragment"
         android:label="HomeViewPagerFragment"
         tools:layout="@layout/fragment_home_view_pager"
-
         >
         <action
             android:id="@+id/action_homeViewPagerFragment_to_notesEditFragment"
@@ -18,8 +17,14 @@
     </fragment>
     <fragment
         android:id="@+id/notesEditFragment"
-        android:name="com.android.myapplication.todo.ui.NotesEditFragment"
+        android:name="com.android.myapplication.todo.ui.edit.NotesEditFragment"
         android:label="NotesEditFragment"
         tools:layout="@layout/fragment_notes_edit"
+        />
+    <fragment
+        android:id="@+id/notesDisplayFragment"
+        android:name="com.android.myapplication.todo.ui.display.NotesDisplayFragment"
+        android:label="NotesDisplayFragment"
+        tools:layout="@layout/fragment_notes_display"
         />
 </navigation>
