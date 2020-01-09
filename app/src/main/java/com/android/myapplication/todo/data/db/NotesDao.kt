@@ -9,10 +9,10 @@ interface NotesDao{
 
     /*Room automatically handle liveData on a background thread*/
     @Query("SELECT * FROM notes ORDER BY id DESC")
-    fun getNotes():LiveData<Notes>
+    fun getNotes():LiveData<List<Notes>>
 
     @Query("SELECT * FROM notes WHERE favorite= 1 ORDER BY id DESC")
-    fun getFavoriteNotes():LiveData<Notes>
+    fun getFavoriteNotes():LiveData<List<Notes>>
 
     @Query("SELECT * FROM notes WHERE id = :noteId")
     suspend fun getNoteById(noteId:Int):Notes?
