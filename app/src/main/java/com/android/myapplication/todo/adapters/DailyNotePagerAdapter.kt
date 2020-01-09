@@ -2,8 +2,8 @@ package com.android.myapplication.todo.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.android.myapplication.todo.ui.NotesListFragment
-import com.android.myapplication.todo.ui.RemindersListFragment
+import com.android.myapplication.todo.ui.list.NotesListFragment
+import com.android.myapplication.todo.ui.list.RemindersListFragment
 import java.lang.IndexOutOfBoundsException
 
 
