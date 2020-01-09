@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 
 import com.android.myapplication.todo.R
@@ -14,8 +15,10 @@ import com.android.myapplication.todo.adapters.DailyNotePagerAdapter
 import com.android.myapplication.todo.adapters.NOTES_LIST_PAGE_INDEX
 import com.android.myapplication.todo.adapters.REMINDERS_LIST_PAGE_INDEX
 import com.android.myapplication.todo.databinding.FragmentHomeViewPagerBinding
+import com.android.myapplication.todo.util.EventObserver
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.IndexOutOfBoundsException
 
 /**
@@ -24,12 +27,14 @@ import java.lang.IndexOutOfBoundsException
 class HomeViewPagerFragment : Fragment() {
     private lateinit var tabLayout:TabLayout
     private lateinit var viewPager:ViewPager2
+    private val viewPagerViewModel:HomeViewPagerViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentHomeViewPagerBinding.inflate(layoutInflater,container,false)
+        binding.viewModel = viewPagerViewModel
         tabLayout = binding.tabs
         viewPager = binding.viewPager
         viewPager.adapter = DailyNotePagerAdapter(this)
@@ -39,6 +44,25 @@ class HomeViewPagerFragment : Fragment() {
         }.attach()
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
         return binding.root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        setupFabNavigation()
+    }
+
+    fun setupFabNavigation(){
+        viewPagerViewModel.fabNavListenner.observe(viewLifecycleOwner,EventObserver{
+            when(viewPager.currentItem){
+                0-> {
+                    val action =
+                        HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToNotesEditFragment()
+                    findNavController().navigate(action)
+                }
+
+            }
+
+        })
     }
 
     private fun getTabIcon(position:Int):Int=
