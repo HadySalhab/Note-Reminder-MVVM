@@ -11,6 +11,9 @@ interface NotesDao{
     @Query("SELECT * FROM notes")
     fun getNotes():LiveData<Notes>
 
+    @Query("SELECT * FROM notes WHERE favorite= 1")
+    fun getFavoriteNotes():LiveData<Notes>
+
     @Query("SELECT * FROM notes WHERE noteId = :noteId")
     suspend fun getNoteById(noteId:String):Notes?
 
