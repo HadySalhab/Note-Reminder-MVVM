@@ -25,6 +25,11 @@ class NotesListViewModel(private val notesRepository: NotesRepository,val app:Ap
         }
 
     }
+
+    val isEmpty = Transformations.map(notes){
+        it.isEmpty()
+    }
+
     val category = Transformations.map(_filter){filterValue->
         when(filterValue) {
             Filter.ALL -> {
