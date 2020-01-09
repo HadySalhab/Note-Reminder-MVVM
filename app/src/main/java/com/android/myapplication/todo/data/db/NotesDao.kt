@@ -26,8 +26,4 @@ interface NotesDao{
     @Query("DELETE FROM notes")
     suspend fun clearAllNotes()
 
-    /*In Sqlite, 1 means true and 0 means false*/
-    @Query("DELETE FROM notes WHERE completed=1")
-    suspend fun deleteCompletedNotes()
-
 }
