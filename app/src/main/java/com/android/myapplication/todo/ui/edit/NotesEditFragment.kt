@@ -69,7 +69,7 @@ class NotesEditFragment : Fragment(),DatePickerFragment.Callbacks {
                 showSnackBar(message)
             }
         })
-        viewModel.navigateUpEvent.observe(viewLifecycleOwner,EventObserver{
+        viewModel.navigationEvent.observe(viewLifecycleOwner,EventObserver{
             navController.navigateUp()
         })
 

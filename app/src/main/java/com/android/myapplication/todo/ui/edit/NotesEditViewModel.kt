@@ -30,9 +30,9 @@ class NotesEditViewModel(
     val snackBarEvent: LiveData<Event<String>>
         get() = _snackBarEvent
 
-    private val _navigateUpEvent=MutableLiveData<Event<Unit>>()
-    val navigateUpEvent:LiveData<Event<Unit>>
-    get() = _navigateUpEvent
+    private val _navigationEvent=MutableLiveData<Event<Unit>>()
+    val navigationEvent:LiveData<Event<Unit>>
+    get() = _navigationEvent
 
     private val _showDatePickerEvent=MutableLiveData<Event<String>>()
     val showDatePickerEvent:LiveData<Event<String>>
@@ -98,7 +98,7 @@ class NotesEditViewModel(
                     notesRepository.update(editableNote)
                 }
             }
-            _navigateUpEvent.value=Event(Unit)
+            _navigationEvent.value=Event(Unit)
         }
     }
 
@@ -112,7 +112,7 @@ class NotesEditViewModel(
 
     }
     fun navigateUp(){
-        _navigateUpEvent.value = Event(Unit)
+        _navigationEvent.value = Event(Unit)
     }
 
     fun showDatePicker(){
