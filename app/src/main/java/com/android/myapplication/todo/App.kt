@@ -31,10 +31,10 @@ class App : Application() {
         viewModel {
             NotesListViewModel(get(), this@App)
         }
-        viewModel { (noteId: Int) ->
+        viewModel { (noteId: String) ->
             NotesDisplayViewModel(get(), noteId)
         }
-        viewModel { (noteId: Int) ->
+        viewModel { (noteId: String) ->
             NotesEditViewModel(get(), noteId,this@App)
         }
 

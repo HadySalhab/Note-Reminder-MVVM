@@ -4,6 +4,6 @@ import androidx.lifecycle.ViewModel
 import com.android.myapplication.todo.repositories.NotesRepository
 
 class NotesDisplayViewModel(private val notesRepository: NotesRepository,
-                            private val noteId:Int) : ViewModel(){
+                            private val noteId:String) : ViewModel(){
 
 }
