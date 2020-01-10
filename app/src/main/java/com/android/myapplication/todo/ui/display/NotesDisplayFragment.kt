@@ -24,7 +24,7 @@ class NotesDisplayFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentNotesDisplayBinding.inflate(layoutInflater)
+        binding = FragmentNotesDisplayBinding.inflate(layoutInflater,container,false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root

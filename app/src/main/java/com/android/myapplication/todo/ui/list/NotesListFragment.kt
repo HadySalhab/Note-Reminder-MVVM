@@ -2,12 +2,15 @@ package com.android.myapplication.todo.ui.list
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.myapplication.todo.adapters.NotesListAdapter
 import com.android.myapplication.todo.data.Notes
 import com.android.myapplication.todo.databinding.FragmentNotesListBinding
@@ -40,14 +43,21 @@ class NotesListFragment : Fragment() {
     ): View? {
 
         noteAdapter = NotesListAdapter(onCheckChangedListener, onNoteClickListener)
-        binding = FragmentNotesListBinding.inflate(layoutInflater)
-        binding.notesList.apply {
+        binding = FragmentNotesListBinding.inflate(layoutInflater,container,false)
+        binding.recyclerview.apply {
             adapter = noteAdapter
             addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
         }
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel.notes.observe(viewLifecycleOwner, Observer { notes->
+            Log.d(TAG, "onActivityCreated: ${notes}")
+        })
     }
 
 

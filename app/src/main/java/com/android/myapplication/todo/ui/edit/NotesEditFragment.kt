@@ -38,7 +38,7 @@ class NotesEditFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         navController = findNavController()
-        binding = FragmentNotesEditBinding.inflate(layoutInflater)
+        binding = FragmentNotesEditBinding.inflate(layoutInflater,container,false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         setuptoolbar()
@@ -67,6 +67,9 @@ class NotesEditFragment : Fragment() {
                 showSnackBar(message)
             }
         })
+        viewModel.navigateUpEvent.observe(viewLifecycleOwner,EventObserver{
+            navController.navigateUp()
+        })
     }
 
     fun showSnackBar(message: String) {
@@ -92,7 +95,7 @@ class NotesEditFragment : Fragment() {
                 true
             }
             android.R.id.home->{
-                navController.navigateUp()
+                viewModel.navigateUp()
                 true
             }
             else -> {
