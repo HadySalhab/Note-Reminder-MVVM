@@ -41,10 +41,12 @@
             </com.google.android.material.appbar.AppBarLayout>
 
             <ImageView
+                app:displayIsFavorite="@{viewModel.note.favorite}"
                 android:id="@+id/display_ic_favorite"
                 app:srcCompat="@drawable/ic_favorite_inactive"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/display_appbarLayout"
@@ -83,6 +85,7 @@
                 app:layout_constraintEnd_toEndOf="@id/guideline_end"
                 app:layout_constraintStart_toStartOf="@+id/guideline_start"
                 app:layout_constraintTop_toBottomOf="@id/display_note_image"
+                android:text="@{viewModel.note.date}"
                 tools:text="9/01/2020"
 
                 />
@@ -96,6 +99,7 @@
                 app:layout_constraintStart_toStartOf="@+id/guideline_start"
                 app:layout_constraintTop_toBottomOf="@id/display_date"
                 android:textAppearance="?attr/textAppearanceHeadline6"
+                android:text="@{viewModel.note.title}"
                 tools:text="A day in Maroubra"
                 />
 
@@ -113,8 +117,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                    android:text="@{viewModel.note.description}"
                     tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-
                     />
 
 

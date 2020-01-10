@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 
@@ -16,6 +17,7 @@ import com.android.myapplication.todo.adapters.NOTES_LIST_PAGE_INDEX
 import com.android.myapplication.todo.adapters.REMINDERS_LIST_PAGE_INDEX
 import com.android.myapplication.todo.data.Notes
 import com.android.myapplication.todo.databinding.FragmentHomeViewPagerBinding
+import com.android.myapplication.todo.ui.list.NotesListFragment
 import com.android.myapplication.todo.util.EventObserver
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -25,16 +27,18 @@ import java.lang.IndexOutOfBoundsException
 /**
  * A simple [Fragment] subclass.
  */
-class HomeViewPagerFragment : Fragment() {
+class HomeViewPagerFragment : Fragment(),NotesListFragment.Callbacks {
     private lateinit var tabLayout:TabLayout
     private lateinit var viewPager:ViewPager2
     private val viewPagerViewModel:HomeViewPagerViewModel by viewModel()
+    private lateinit var navController:NavController
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        navController =findNavController()
         val binding = FragmentHomeViewPagerBinding.inflate(layoutInflater,container,false)
         binding.viewModel = viewPagerViewModel
         tabLayout = binding.tabs
@@ -79,6 +83,11 @@ class HomeViewPagerFragment : Fragment() {
             REMINDERS_LIST_PAGE_INDEX->getString(R.string.my_reminders_list_title)
             else->null
         }
+
+    override fun onNoteClick(note: Notes) {
+        val action = HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToNotesDisplayFragment(note.noteIdentifier)
+        navController.navigate(action)
+    }
 
 
 }

@@ -15,6 +15,9 @@
             android:id="@+id/action_homeViewPagerFragment_to_notesEditFragment"
             app:destination="@id/notesEditFragment"
             app:popUpTo="@+id/homeViewPagerFragment" />
+        <action
+            android:id="@+id/action_homeViewPagerFragment_to_notesDisplayFragment"
+            app:destination="@id/notesDisplayFragment" />
     </fragment>
     <fragment
         android:id="@+id/notesEditFragment"
@@ -40,15 +43,5 @@
         <argument
             android:name="note_identifier"
             app:argType="string" />
-    </fragment>
-    <fragment
-        android:id="@+id/notesListFragment"
-        android:name="com.android.myapplication.todo.ui.list.NotesListFragment"
-        android:label="NotesListFragment"
-        tools:layout="@layout/fragment_notes_list"
-        >
-        <action
-            android:id="@+id/action_notesListFragment_to_notesDisplayFragment"
-            app:destination="@id/notesDisplayFragment" />
     </fragment>
 </navigation>
