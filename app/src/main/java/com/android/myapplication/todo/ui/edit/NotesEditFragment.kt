@@ -104,14 +104,9 @@ class NotesEditFragment : Fragment() {
         }
     }
 
-    override fun onStop() {
-        super.onStop()
-        deleteEmptyNote()
-    }
 
-    fun deleteEmptyNote() {
-        viewModel.deleteEmptyNote()
-    }
+
+
 
 
 }

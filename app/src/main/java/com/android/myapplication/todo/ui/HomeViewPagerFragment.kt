@@ -57,9 +57,7 @@ class HomeViewPagerFragment : Fragment() {
         viewPagerViewModel.fabNavListenner.observe(viewLifecycleOwner,EventObserver{
             when(viewPager.currentItem){
                 NOTES_LIST_PAGE_INDEX-> {
-                    val note = Notes()
-                    viewPagerViewModel.insert(note)
-                    val action = HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToNotesEditFragment(note.id)
+                    val action = HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToNotesEditFragment(null)
                     findNavController().navigate(action)
                 }
 

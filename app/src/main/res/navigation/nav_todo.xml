@@ -13,7 +13,8 @@
         >
         <action
             android:id="@+id/action_homeViewPagerFragment_to_notesEditFragment"
-            app:destination="@id/notesEditFragment" />
+            app:destination="@id/notesEditFragment"
+            app:popUpTo="@+id/homeViewPagerFragment" />
     </fragment>
     <fragment
         android:id="@+id/notesEditFragment"
@@ -23,7 +24,8 @@
         >
         <argument
             android:name="noteId"
-            app:argType="integer" />
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/notesDisplayFragment"
@@ -33,10 +35,11 @@
         >
         <action
             android:id="@+id/action_notesDisplayFragment_to_notesEditFragment"
-            app:destination="@id/notesEditFragment" />
+            app:destination="@id/notesEditFragment"
+            app:popUpTo="@+id/notesDisplayFragment" />
         <argument
             android:name="noteId"
-            app:argType="integer" />
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/notesListFragment"
