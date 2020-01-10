@@ -7,7 +7,13 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.android.myapplication.todo.R
 import com.android.myapplication.todo.databinding.FragmentNotesEditBinding
 import com.android.myapplication.todo.util.EventObserver
@@ -21,6 +27,8 @@ import org.koin.core.parameter.parametersOf
 class NotesEditFragment : Fragment() {
     private val args by navArgs<NotesEditFragmentArgs>()
     private lateinit var binding: FragmentNotesEditBinding
+    private lateinit var navController: NavController
+    private lateinit var appBarConfig: AppBarConfiguration
     private val viewModel: NotesEditViewModel by viewModel {
         parametersOf(args.noteId)
     }
@@ -29,6 +37,7 @@ class NotesEditFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        navController = findNavController()
         binding = FragmentNotesEditBinding.inflate(layoutInflater)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
@@ -36,10 +45,13 @@ class NotesEditFragment : Fragment() {
         setHasOptionsMenu(true)
         return binding.root
     }
+
     fun setuptoolbar() {
         (requireActivity() as AppCompatActivity).apply {
             setSupportActionBar(binding.editToolbar)
             supportActionBar?.setDisplayShowTitleEnabled(false)
+            appBarConfig = AppBarConfiguration(navController.graph)
+            setupActionBarWithNavController(navController, appBarConfig)
         }
     }
 
@@ -77,6 +89,10 @@ class NotesEditFragment : Fragment() {
                 true
             }
             R.id.edit_item_delete -> {
+                true
+            }
+            android.R.id.home->{
+                navController.navigateUp()
                 true
             }
             else -> {
