@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/edit_item_save"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_save"
+        android:title="@string/optionmenu_save"/>
+    <item
+        android:id="@+id/edit_item_date"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_date"
+        android:title="@string/optionmenu_datepicker"/>
+    <item
+        android:id="@+id/edit_item_delete"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_delete"
+        android:title="@string/delete_note"/>
+
+</menu>
