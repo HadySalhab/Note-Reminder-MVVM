@@ -11,7 +11,7 @@ import com.android.myapplication.todo.R
 
 class NotesEditViewModel(
     private val notesRepository: NotesRepository,
-    private val noteId: Int,
+    private val noteId: String?,
     private val app: Application
 ) : AndroidViewModel(app) {
 
@@ -30,6 +30,10 @@ class NotesEditViewModel(
     val snackBarEvent: LiveData<Event<String>>
         get() = _snackBarEvent
 
+    private val _navigateUpEvent=MutableLiveData<Event<Unit>>()
+    val navigateUpEvent:LiveData<Event<Unit>>
+    get() = _navigateUpEvent
+
 
     val titleEditText = MutableLiveData<String>()
 
@@ -42,7 +46,11 @@ class NotesEditViewModel(
 
     fun initializeNote() {
         viewModelScope.launch {
-            editableNote = notesRepository.getNoteById(noteId) ?: Notes()
+            if(noteId!=null){
+                editableNote=notesRepository.getNoteById(noteId)?:Notes()
+            }else{
+                editableNote=Notes()
+            }
             updateUI()
         }
     }
@@ -66,18 +74,12 @@ class NotesEditViewModel(
         Log.d(TAG, "showlog: date is ${dateTextView.value}")
     }
 
-    fun deleteEmptyNote() {
-        if (titleEditText.value.isNullOrEmpty() || descriptionEditText.value.isNullOrEmpty()) {
-            viewModelScope.launch {
-                notesRepository.delete(editableNote)
-            }
 
-        }
-    }
     fun deleteNote(){
         viewModelScope.launch {
             notesRepository.delete(editableNote)
         }
+
     }
 
     fun saveNote() {
@@ -88,6 +90,7 @@ class NotesEditViewModel(
             viewModelScope.launch {
                 notesRepository.update(editableNote)
             }
+            _navigateUpEvent.value=Event(Unit)
         }
     }
 
@@ -99,6 +102,9 @@ class NotesEditViewModel(
             date = dateTextView.value!!
         }
 
+    }
+    fun navigateUp(){
+        _navigateUpEvent.value = Event(Unit)
     }
 
 }
