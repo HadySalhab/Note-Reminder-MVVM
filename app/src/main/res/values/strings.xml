@@ -15,4 +15,5 @@
     <string name="optionmenu_datepicker">Note Date</string>
     <string name="delete_note">Delete Note</string>
     <string name="snackbartext_emptynote">Notes cannot be empty</string>
+    <string name="edit_note">Edit Note</string>
 </resources>
