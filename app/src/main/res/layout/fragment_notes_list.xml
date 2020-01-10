@@ -13,43 +13,40 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/notes_container_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clickable="true"
-            android:orientation="vertical"
-            android:focusable="true">
+            android:layout_height="match_parent">
 
-        <LinearLayout
-            android:visibility="@{viewModel.isEmpty ? View.GONE : View.VISIBLE}"
-            android:id="@+id/notes_linear_layout"
+
+        <TextView
+            android:id="@+id/filtering_text"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@{viewModel.category}"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:visibility="@{viewModel.isEmpty ? View.GONE : View.VISIBLE}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="@dimen/medium_margin"
+            android:layout_marginEnd="@dimen/medium_margin"
+            android:layout_marginTop="@dimen/medium_margin"
+            tools:text="All Notes" />
+
+        <androidx.recyclerview.widget.RecyclerView
+
+            android:id="@+id/recyclerview"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_marginTop="@dimen/small_margin"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/filtering_text"
+            app:notesList="@{viewModel.notes}"
+            tools:itemCount="16"
+            tools:listitem="@layout/notes_list_item" />
 
-            <TextView
-                android:id="@+id/filtering_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/list_item_padding"
-                android:layout_marginTop="@dimen/medium_margin"
-                android:layout_marginRight="@dimen/list_item_padding"
-                android:layout_marginBottom="@dimen/medium_margin"
-                android:gravity="center_vertical"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:text="@{viewModel.category}"
-                tools:text="All Notes"
-                />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/notes_list"
-                app:notesList="@{viewModel.notes}"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-        </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/no_tasks_layout"
