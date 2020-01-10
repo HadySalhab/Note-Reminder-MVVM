@@ -2,12 +2,16 @@ package com.android.myapplication.todo.ui.edit
 
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.text.TextUtils
+import android.view.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import com.android.myapplication.todo.R
 import com.android.myapplication.todo.databinding.FragmentNotesEditBinding
+import com.android.myapplication.todo.util.EventObserver
+import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -28,7 +32,56 @@ class NotesEditFragment : Fragment() {
         binding = FragmentNotesEditBinding.inflate(layoutInflater)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        setuptoolbar()
+        setHasOptionsMenu(true)
         return binding.root
+    }
+    fun setuptoolbar() {
+        (requireActivity() as AppCompatActivity).apply {
+            setSupportActionBar(binding.editToolbar)
+            supportActionBar?.setDisplayShowTitleEnabled(false)
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.edit_optionmenu, menu)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel.snackBarEvent.observe(viewLifecycleOwner, EventObserver { message ->
+            if (!TextUtils.isEmpty(message)) {
+                showSnackBar(message)
+            }
+        })
+    }
+
+    fun showSnackBar(message: String) {
+        Snackbar.make(
+            requireActivity().findViewById<CoordinatorLayout>(R.id.edit_coordinatorlayout),
+            message,
+            Snackbar.LENGTH_LONG
+        ).show()
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.edit_item_save -> {
+                viewModel.saveNote()
+                true
+            }
+            R.id.edit_item_date -> {
+                true
+            }
+            R.id.edit_item_delete -> {
+                true
+            }
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        }
     }
 
     override fun onStop() {
@@ -36,7 +89,7 @@ class NotesEditFragment : Fragment() {
         deleteEmptyNote()
     }
 
-    fun deleteEmptyNote(){
+    fun deleteEmptyNote() {
         viewModel.deleteEmptyNote()
     }
 

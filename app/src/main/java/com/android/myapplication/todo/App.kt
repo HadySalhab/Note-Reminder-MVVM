@@ -35,7 +35,7 @@ class App : Application() {
             NotesDisplayViewModel(get(), noteId)
         }
         viewModel { (noteId: Int) ->
-            NotesEditViewModel(get(), noteId)
+            NotesEditViewModel(get(), noteId,this@App)
         }
 
     }

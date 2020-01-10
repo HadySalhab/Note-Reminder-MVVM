@@ -10,6 +10,7 @@
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/edit_coordinatorlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -21,6 +22,7 @@
                 android:id="@+id/edit_appbarLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:theme="@style/Theme.Todo.AppBarOverlay"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -38,6 +40,7 @@
                         android:gravity="center_vertical"
                         android:text="@string/app_name"
                         android:textAppearance="@style/Theme.Todo.Toolbar.Text" />
+
                 </androidx.appcompat.widget.Toolbar>
             </com.google.android.material.appbar.AppBarLayout>
 
