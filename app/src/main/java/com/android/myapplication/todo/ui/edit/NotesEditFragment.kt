@@ -31,5 +31,14 @@ class NotesEditFragment : Fragment() {
         return binding.root
     }
 
+    override fun onStop() {
+        super.onStop()
+        deleteEmptyNote()
+    }
+
+    fun deleteEmptyNote(){
+        viewModel.deleteEmptyNote()
+    }
+
 
 }

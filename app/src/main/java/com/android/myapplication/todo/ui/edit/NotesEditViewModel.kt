@@ -55,6 +55,14 @@ class NotesEditViewModel (private val notesRepository: NotesRepository,
         Log.d(TAG, "showlog: date is ${dateTextView.value}")
     }
 
+    fun deleteEmptyNote(){
+        if(titleEditText.value.isNullOrEmpty() || descriptionEditText.value.isNullOrEmpty()){
+            viewModelScope.launch {
+                notesRepository.delete(editableNote)
+            }
+
+        }
+    }
 
 
 }
