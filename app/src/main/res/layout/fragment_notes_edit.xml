@@ -43,6 +43,7 @@
 
             <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/edit_ic_favorite"
+                android:checked="@={viewModel.favoriteCheckBox}"
                 android:button="@drawable/ic_favorite_selector"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -77,6 +78,7 @@
                 app:layout_constraintGuide_end="16dp" />
 
             <TextView
+                android:text="@={viewModel.dateTextView}"
                 android:id="@+id/edit_note_date"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -90,6 +92,7 @@
 
 
                 <EditText
+                    android:text="@={viewModel.titleEditText}"
                     android:id="@+id/edit_title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -113,6 +116,7 @@
                 app:layout_constraintTop_toBottomOf="@id/edit_title">
 
                 <EditText
+                    android:text="@={viewModel.descriptionEditText}"
                     android:background="@null"
                     android:id="@+id/edit_description"
                     android:layout_width="match_parent"
