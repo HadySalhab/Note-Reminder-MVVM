@@ -32,9 +32,9 @@ class NotesRepository (private val noteDao:NotesDao){
         }
     }
 
-    suspend fun getNoteById(noteId:Int){
-        withContext(Dispatchers.IO){
-            noteDao.getNoteById(noteId)
+    suspend fun getNoteById(noteId:Int):Notes?{
+       return withContext(Dispatchers.IO){
+          noteDao.getNoteById(noteId)
         }
     }
 
