@@ -34,14 +34,18 @@ class NotesEditViewModel(
     val navigateUpEvent:LiveData<Event<Unit>>
     get() = _navigateUpEvent
 
+    private val _showDatePickerEvent=MutableLiveData<Event<String>>()
+    val showDatePickerEvent:LiveData<Event<String>>
+    get() = _showDatePickerEvent
 
-    val titleEditText = MutableLiveData<String>()
 
-    val descriptionEditText = MutableLiveData<String>()
+    val _titleEditText = MutableLiveData<String>()
 
-    val favoriteCheckBox = MutableLiveData<Boolean>()
+    val _descriptionEditText = MutableLiveData<String>()
 
-    val dateTextView = MutableLiveData<String>()
+    val _favoriteCheckBox = MutableLiveData<Boolean>()
+
+    val _dateTextView = MutableLiveData<String>()
 
 
     fun initializeNote() {
@@ -56,10 +60,10 @@ class NotesEditViewModel(
     }
 
     fun updateUI() {
-        titleEditText.value = editableNote.title
-        descriptionEditText.value = editableNote.description
-        favoriteCheckBox.value = editableNote.isFavorite
-        dateTextView.value = editableNote.date
+        _titleEditText.value = editableNote.title
+        _descriptionEditText.value = editableNote.description
+        _favoriteCheckBox.value = editableNote.isFavorite
+        _dateTextView.value = editableNote.date
     }
 
     override fun onCleared() {
@@ -68,10 +72,10 @@ class NotesEditViewModel(
     }
 
     fun showlog() {
-        Log.d(TAG, "showlog: title is ${titleEditText.value}")
-        Log.d(TAG, "showlog: desc is ${descriptionEditText.value}")
-        Log.d(TAG, "showlog: isfav ${favoriteCheckBox.value}")
-        Log.d(TAG, "showlog: date is ${dateTextView.value}")
+        Log.d(TAG, "showlog: title is ${_titleEditText.value}")
+        Log.d(TAG, "showlog: desc is ${_descriptionEditText.value}")
+        Log.d(TAG, "showlog: isfav ${_favoriteCheckBox.value}")
+        Log.d(TAG, "showlog: date is ${_dateTextView.value}")
     }
 
 
@@ -83,7 +87,7 @@ class NotesEditViewModel(
     }
 
     fun saveNote() {
-        if (titleEditText.value.isNullOrEmpty() || descriptionEditText.value.isNullOrEmpty()) {
+        if (_titleEditText.value.isNullOrEmpty() || _descriptionEditText.value.isNullOrEmpty()) {
             _snackBarEvent.value = Event(app.getString(R.string.snackbartext_emptynote))
         } else {
             updateNote()
@@ -100,15 +104,23 @@ class NotesEditViewModel(
 
     fun updateNote() {
         editableNote.apply {
-            title = titleEditText.value!!
-            description = descriptionEditText.value!!
-            isFavorite = favoriteCheckBox.value!!
-            date = dateTextView.value!!
+            title = _titleEditText.value!!
+            description = _descriptionEditText.value!!
+            isFavorite = _favoriteCheckBox.value!!
+            date = _dateTextView.value!!
         }
 
     }
     fun navigateUp(){
         _navigateUpEvent.value = Event(Unit)
+    }
+
+    fun showDatePicker(){
+        _showDatePickerEvent.value= Event(editableNote.date)
+    }
+
+    fun updateDateTextView(date:String){
+        _dateTextView.value = date
     }
 
 }

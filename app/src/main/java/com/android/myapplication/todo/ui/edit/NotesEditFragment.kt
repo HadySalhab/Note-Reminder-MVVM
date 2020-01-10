@@ -8,15 +8,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.android.myapplication.todo.R
 import com.android.myapplication.todo.databinding.FragmentNotesEditBinding
+import com.android.myapplication.todo.ui.picker.DatePickerFragment
+import com.android.myapplication.todo.util.DIALOG_DATE
 import com.android.myapplication.todo.util.EventObserver
+import com.android.myapplication.todo.util.REQUEST_DATE
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -24,7 +25,7 @@ import org.koin.core.parameter.parametersOf
 /**
  * A simple [Fragment] subclass.
  */
-class NotesEditFragment : Fragment() {
+class NotesEditFragment : Fragment(),DatePickerFragment.Callbacks {
     private val args by navArgs<NotesEditFragmentArgs>()
     private lateinit var binding: FragmentNotesEditBinding
     private lateinit var navController: NavController
@@ -71,6 +72,13 @@ class NotesEditFragment : Fragment() {
         viewModel.navigateUpEvent.observe(viewLifecycleOwner,EventObserver{
             navController.navigateUp()
         })
+
+        viewModel.showDatePickerEvent.observe(viewLifecycleOwner,EventObserver{date->
+            DatePickerFragment.newInstance(date).apply {
+                setTargetFragment(this@NotesEditFragment,REQUEST_DATE)
+                show(this@NotesEditFragment.requireFragmentManager(),DIALOG_DATE)
+            }
+        })
     }
 
     fun showSnackBar(message: String) {
@@ -89,6 +97,7 @@ class NotesEditFragment : Fragment() {
                 true
             }
             R.id.edit_item_date -> {
+                viewModel.showDatePicker()
                 true
             }
             R.id.edit_item_delete -> {
@@ -105,9 +114,9 @@ class NotesEditFragment : Fragment() {
         }
     }
 
-
-
-
+    override fun onDateSelected(date: String) {
+        viewModel.updateDateTextView(date)
+    }
 
 
 }

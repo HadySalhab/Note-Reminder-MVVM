@@ -1,9 +1,11 @@
 package com.android.myapplication.todo.data
 
 import android.accounts.AuthenticatorDescription
+import android.annotation.SuppressLint
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.text.SimpleDateFormat
 import java.util.*
 
 @Entity(tableName = "notes")
@@ -12,7 +14,7 @@ data class Notes(
     @ColumnInfo(name="note_identifier")  val noteIdentifier:String = UUID.randomUUID().toString(),
     @ColumnInfo(name = "title") var title: String = "",
     @ColumnInfo(name = "description") var description: String = "",
-    @ColumnInfo(name = "date") var date:String="",
+    @SuppressLint("SimpleDateFormat") @ColumnInfo(name = "date") var date:String=SimpleDateFormat("EEE, d MMM yyyy").format(Date()),
     @ColumnInfo(name = "favorite") var isFavorite:Boolean = false
 ){
     val titleForNoteList:String
