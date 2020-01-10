@@ -30,7 +30,7 @@ class NotesEditFragment : Fragment() {
     private lateinit var navController: NavController
     private lateinit var appBarConfig: AppBarConfiguration
     private val viewModel: NotesEditViewModel by viewModel {
-        parametersOf(args.noteId)
+        parametersOf(args.noteIdentifier)
     }
 
     override fun onCreateView(
@@ -58,6 +58,7 @@ class NotesEditFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.edit_optionmenu, menu)
+        menu.findItem(R.id.edit_item_delete).isVisible = args.noteIdentifier != null
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

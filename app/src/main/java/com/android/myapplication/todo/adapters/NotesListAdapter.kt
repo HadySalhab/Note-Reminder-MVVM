@@ -51,7 +51,7 @@ class NotesListAdapter(
 
 class NotesDiffUtil : DiffUtil.ItemCallback<Notes>() {
     override fun areItemsTheSame(oldItem: Notes, newItem: Notes): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.noteIdentifier == newItem.noteIdentifier
     }
 
     override fun areContentsTheSame(oldItem: Notes, newItem: Notes): Boolean {

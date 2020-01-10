@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.myapplication.todo.adapters.NotesListAdapter
 import com.android.myapplication.todo.data.Notes
 import com.android.myapplication.todo.databinding.FragmentNotesListBinding
@@ -29,7 +28,7 @@ class NotesListFragment : Fragment() {
         viewModel.updateNote(note)
     }
     private val onNoteClickListener: (Notes) -> Unit = { note ->
-        val action = NotesListFragmentDirections.actionNotesListFragmentToNotesDisplayFragment(note.id)
+        val action = NotesListFragmentDirections.actionNotesListFragmentToNotesDisplayFragment(note.noteIdentifier)
         findNavController().navigate(action)
     }
     private lateinit var noteAdapter: NotesListAdapter

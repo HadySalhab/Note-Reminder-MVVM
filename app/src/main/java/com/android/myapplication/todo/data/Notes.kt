@@ -8,7 +8,8 @@ import java.util.*
 
 @Entity(tableName = "notes")
 data class Notes(
-    @PrimaryKey  val id:String = UUID.randomUUID().toString(),
+    @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "_id") val _id:Int = 0,
+    @ColumnInfo(name="note_identifier")  val noteIdentifier:String = UUID.randomUUID().toString(),
     @ColumnInfo(name = "title") var title: String = "",
     @ColumnInfo(name = "description") var description: String = "",
     @ColumnInfo(name = "date") var date:String="",
@@ -21,6 +22,6 @@ data class Notes(
     get() = title.isEmpty() || description.isEmpty()
 
     val photoFileName
-    get() = "IMG_$id.jpg"
+    get() = "IMG_$noteIdentifier.jpg"
 
 }

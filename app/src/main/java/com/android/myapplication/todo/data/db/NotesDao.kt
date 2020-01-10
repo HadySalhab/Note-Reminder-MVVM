@@ -8,13 +8,13 @@ import com.android.myapplication.todo.data.Notes
 interface NotesDao{
 
     /*Room automatically handle liveData on a background thread*/
-    @Query("SELECT * FROM notes ORDER BY id DESC")
+    @Query("SELECT * FROM notes ORDER BY _id DESC")
     fun getNotes():LiveData<List<Notes>>
 
-    @Query("SELECT * FROM notes WHERE favorite= 1 ORDER BY id DESC")
+    @Query("SELECT * FROM notes WHERE favorite= 1 ORDER BY _id DESC")
     fun getFavoriteNotes():LiveData<List<Notes>>
 
-    @Query("SELECT * FROM notes WHERE id = :noteId")
+    @Query("SELECT * FROM notes WHERE note_identifier = :noteId")
     suspend fun getNoteById(noteId:String):Notes?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

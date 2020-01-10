@@ -11,7 +11,7 @@ import com.android.myapplication.todo.R
 
 class NotesEditViewModel(
     private val notesRepository: NotesRepository,
-    private val noteId: String?,
+    private val noteIdentifier: String?,
     private val app: Application
 ) : AndroidViewModel(app) {
 
@@ -46,8 +46,8 @@ class NotesEditViewModel(
 
     fun initializeNote() {
         viewModelScope.launch {
-            if(noteId!=null){
-                editableNote=notesRepository.getNoteById(noteId)?:Notes()
+            if(noteIdentifier!=null){
+                editableNote=notesRepository.getNoteById(noteIdentifier)?:Notes()
             }else{
                 editableNote=Notes()
             }
@@ -88,7 +88,11 @@ class NotesEditViewModel(
         } else {
             updateNote()
             viewModelScope.launch {
-                notesRepository.update(editableNote)
+                if(noteIdentifier==null) {
+                    notesRepository.insert(editableNote)
+                }else{
+                    notesRepository.update(editableNote)
+                }
             }
             _navigateUpEvent.value=Event(Unit)
         }

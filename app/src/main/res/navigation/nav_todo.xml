@@ -23,7 +23,7 @@
         tools:layout="@layout/fragment_notes_edit"
         >
         <argument
-            android:name="noteId"
+            android:name="note_identifier"
             app:argType="string"
             app:nullable="true" />
     </fragment>
@@ -38,7 +38,7 @@
             app:destination="@id/notesEditFragment"
             app:popUpTo="@+id/notesDisplayFragment" />
         <argument
-            android:name="noteId"
+            android:name="note_identifier"
             app:argType="string" />
     </fragment>
     <fragment

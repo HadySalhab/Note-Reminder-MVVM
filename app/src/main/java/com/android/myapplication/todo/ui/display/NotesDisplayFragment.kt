@@ -16,7 +16,7 @@ class NotesDisplayFragment : Fragment() {
     private val args by navArgs<NotesDisplayFragmentArgs>()
     private lateinit var binding: FragmentNotesDisplayBinding
     private val viewModel: NotesDisplayViewModel by viewModel {
-        parametersOf(args.noteId)
+        parametersOf(args.noteIdentifier)
     }
 
     override fun onCreateView(
