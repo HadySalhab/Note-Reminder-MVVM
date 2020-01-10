@@ -15,7 +15,7 @@ interface NotesDao{
     fun getFavoriteNotes():LiveData<List<Notes>>
 
     @Query("SELECT * FROM notes WHERE id = :noteId")
-    suspend fun getNoteById(noteId:Int):Notes?
+    suspend fun getNoteById(noteId:String):Notes?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNote(note:Notes)
