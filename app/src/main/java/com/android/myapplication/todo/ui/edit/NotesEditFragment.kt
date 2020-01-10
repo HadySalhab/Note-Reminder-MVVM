@@ -73,6 +73,7 @@ class NotesEditFragment : Fragment() {
                 true
             }
             R.id.edit_item_date -> {
+                viewModel.deleteNote()
                 true
             }
             R.id.edit_item_delete -> {

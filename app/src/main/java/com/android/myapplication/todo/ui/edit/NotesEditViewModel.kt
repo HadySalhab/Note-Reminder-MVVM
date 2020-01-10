@@ -74,6 +74,11 @@ class NotesEditViewModel(
 
         }
     }
+    fun deleteNote(){
+        viewModelScope.launch {
+            notesRepository.delete(editableNote)
+        }
+    }
 
     fun saveNote() {
         if (titleEditText.value.isNullOrEmpty() || descriptionEditText.value.isNullOrEmpty()) {
