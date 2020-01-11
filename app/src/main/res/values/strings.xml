@@ -16,4 +16,7 @@
     <string name="delete_note">Delete Note</string>
     <string name="snackbartext_emptynote">Notes cannot be empty</string>
     <string name="edit_note">Edit Note</string>
+    <string name="delete_message">Delete Note?</string>
+    <string name="delete_dialog_positive_button">DELETE</string>
+    <string name="delete_dialog_negative_button">CANCEL</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.android.myapplication.todo.ui.picker
+package com.android.myapplication.todo.ui.dialogs
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog

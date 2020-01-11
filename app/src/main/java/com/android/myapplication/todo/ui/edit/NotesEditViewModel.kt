@@ -8,6 +8,7 @@ import com.android.myapplication.todo.repositories.NotesRepository
 import com.android.myapplication.todo.util.Event
 import kotlinx.coroutines.launch
 import com.android.myapplication.todo.R
+import com.android.myapplication.todo.util.Destination
 
 class NotesEditViewModel(
     private val notesRepository: NotesRepository,
@@ -30,13 +31,17 @@ class NotesEditViewModel(
     val snackBarEvent: LiveData<Event<String>>
         get() = _snackBarEvent
 
-    private val _navigationEvent=MutableLiveData<Event<Unit>>()
-    val navigationEvent:LiveData<Event<Unit>>
-    get() = _navigationEvent
+    private val _navigationEvent = MutableLiveData<Event<Destination>>()
+    val navigationEvent: LiveData<Event<Destination>>
+        get() = _navigationEvent
 
-    private val _showDatePickerEvent=MutableLiveData<Event<String>>()
-    val showDatePickerEvent:LiveData<Event<String>>
-    get() = _showDatePickerEvent
+    private val _showDatePickerEvent = MutableLiveData<Event<String>>()
+    val showDatePickerEvent: LiveData<Event<String>>
+        get() = _showDatePickerEvent
+
+    private val _showDeletDialogEvent = MutableLiveData<Event<Unit>>()
+    val showDeleteDialogEvent: LiveData<Event<Unit>>
+        get() = _showDeletDialogEvent
 
 
     val _titleEditText = MutableLiveData<String>()
@@ -50,10 +55,10 @@ class NotesEditViewModel(
 
     fun initializeNote() {
         viewModelScope.launch {
-            if(noteIdentifier!=null){
-                editableNote=notesRepository.getNoteById(noteIdentifier)?:Notes()
-            }else{
-                editableNote=Notes()
+            if (noteIdentifier != null) {
+                editableNote = notesRepository.getNoteById(noteIdentifier) ?: Notes()
+            } else {
+                editableNote = Notes()
             }
             updateUI()
         }
@@ -79,7 +84,7 @@ class NotesEditViewModel(
     }
 
 
-    fun deleteNote(){
+    fun deleteNote() {
         viewModelScope.launch {
             notesRepository.delete(editableNote)
         }
@@ -92,13 +97,13 @@ class NotesEditViewModel(
         } else {
             updateNote()
             viewModelScope.launch {
-                if(noteIdentifier==null) {
+                if (noteIdentifier == null) {
                     notesRepository.insert(editableNote)
-                }else{
+                } else {
                     notesRepository.update(editableNote)
                 }
             }
-            _navigationEvent.value=Event(Unit)
+            _navigationEvent.value = Event(Destination.UP)
         }
     }
 
@@ -111,16 +116,26 @@ class NotesEditViewModel(
         }
 
     }
-    fun navigateUp(){
-        _navigationEvent.value = Event(Unit)
+
+    fun navigateUp() {
+        _navigationEvent.value = Event(Destination.UP)
     }
 
-    fun showDatePicker(){
-        _showDatePickerEvent.value= Event(editableNote.date)
+    fun showDatePicker() {
+        _showDatePickerEvent.value = Event(editableNote.date)
     }
 
-    fun updateDateTextView(date:String){
+    fun showDeleteDialog() {
+        _showDeletDialogEvent.value = Event(Unit)
+    }
+
+    fun updateDateTextView(date: String) {
         _dateTextView.value = date
+    }
+
+    fun deleteAndNavigateToList(){
+        deleteNote()
+        _navigationEvent.value = Event(Destination.VIEWPAGERFRAGMENT)
     }
 
 }

@@ -14,10 +14,9 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.android.myapplication.todo.R
 import com.android.myapplication.todo.databinding.FragmentNotesEditBinding
-import com.android.myapplication.todo.ui.picker.DatePickerFragment
-import com.android.myapplication.todo.util.DIALOG_DATE
-import com.android.myapplication.todo.util.EventObserver
-import com.android.myapplication.todo.util.REQUEST_DATE
+import com.android.myapplication.todo.ui.dialogs.DatePickerFragment
+import com.android.myapplication.todo.ui.dialogs.DeleteDialogFragment
+import com.android.myapplication.todo.util.*
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -25,7 +24,7 @@ import org.koin.core.parameter.parametersOf
 /**
  * A simple [Fragment] subclass.
  */
-class NotesEditFragment : Fragment(),DatePickerFragment.Callbacks {
+class NotesEditFragment : Fragment(), DatePickerFragment.Callbacks,DeleteDialogFragment.Callbacks {
     private val args by navArgs<NotesEditFragmentArgs>()
     private lateinit var binding: FragmentNotesEditBinding
     private lateinit var navController: NavController
@@ -39,7 +38,7 @@ class NotesEditFragment : Fragment(),DatePickerFragment.Callbacks {
         savedInstanceState: Bundle?
     ): View? {
         navController = findNavController()
-        binding = FragmentNotesEditBinding.inflate(layoutInflater,container,false)
+        binding = FragmentNotesEditBinding.inflate(layoutInflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         setuptoolbar()
@@ -69,14 +68,27 @@ class NotesEditFragment : Fragment(),DatePickerFragment.Callbacks {
                 showSnackBar(message)
             }
         })
-        viewModel.navigationEvent.observe(viewLifecycleOwner,EventObserver{
-            navController.navigateUp()
+        viewModel.navigationEvent.observe(viewLifecycleOwner, EventObserver {destination->
+            when(destination){
+                Destination.UP->{
+                    navController.navigateUp()
+                }
+                Destination.VIEWPAGERFRAGMENT->{
+                    navController.popBackStack(R.id.homeViewPagerFragment,false)
+                }
+            }
         })
 
-        viewModel.showDatePickerEvent.observe(viewLifecycleOwner,EventObserver{date->
+        viewModel.showDatePickerEvent.observe(viewLifecycleOwner, EventObserver { date ->
             DatePickerFragment.newInstance(date).apply {
-                setTargetFragment(this@NotesEditFragment,REQUEST_DATE)
-                show(this@NotesEditFragment.requireFragmentManager(),DIALOG_DATE)
+                setTargetFragment(this@NotesEditFragment, REQUEST_DATE)
+                show(this@NotesEditFragment.requireFragmentManager(), DIALOG_DATE)
+            }
+        })
+        viewModel.showDeleteDialogEvent.observe(viewLifecycleOwner, EventObserver {
+            DeleteDialogFragment().apply {
+                setTargetFragment(this@NotesEditFragment, REQUEST_DELETE_ANSWER)
+                show(this@NotesEditFragment.requireFragmentManager(), DIALOG_DELETE)
             }
         })
     }
@@ -101,10 +113,10 @@ class NotesEditFragment : Fragment(),DatePickerFragment.Callbacks {
                 true
             }
             R.id.edit_item_delete -> {
-                viewModel.deleteNote()
+                viewModel.showDeleteDialog()
                 true
             }
-            android.R.id.home->{
+            android.R.id.home -> {
                 viewModel.navigateUp()
                 true
             }
@@ -116,6 +128,10 @@ class NotesEditFragment : Fragment(),DatePickerFragment.Callbacks {
 
     override fun onDateSelected(date: String) {
         viewModel.updateDateTextView(date)
+    }
+
+    override fun onPositiveButtonClick() {
+        viewModel.deleteAndNavigateToList()
     }
 
 
