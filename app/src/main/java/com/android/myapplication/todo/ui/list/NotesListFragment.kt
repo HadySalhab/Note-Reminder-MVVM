@@ -29,7 +29,8 @@ class NotesListFragment : Fragment() {
     private lateinit var binding: FragmentNotesListBinding
 
     private val onCheckChangedListener: (Notes) -> Unit = { note ->
-        viewModel.updateNote(note)
+        val newNote = note.copy(isFavorite = !note.isFavorite)
+        viewModel.updateNote(newNote)
     }
     private val onNoteClickListener: (Notes) -> Unit = { note ->
         parentFragment?.let { parentFragment->
