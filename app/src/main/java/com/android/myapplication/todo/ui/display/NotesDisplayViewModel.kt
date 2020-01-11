@@ -10,30 +10,25 @@ import com.android.myapplication.todo.util.Destination
 import com.android.myapplication.todo.util.Event
 import kotlinx.coroutines.launch
 
-class NotesDisplayViewModel(private val notesRepository: NotesRepository,
-                            private val noteIdentifier:String) : ViewModel(){
-    private val _note = MutableLiveData<Notes>()
-    val note:LiveData<Notes>
-    get() = _note
+class NotesDisplayViewModel(
+    private val notesRepository: NotesRepository,
+    private val noteIdentifier: String
+) : ViewModel() {
 
-    private val _navigationEvent = MutableLiveData< Event<Destination>>()
-    val navigationEvent:LiveData<Event<Destination>>
-    get() = _navigationEvent
+    val note: LiveData<Notes> = notesRepository.getNoteLiveDataById(noteIdentifier)
 
-    init {
-        initializeNote()
-    }
-    fun initializeNote(){
-        viewModelScope.launch {
-            _note.value=notesRepository.getNoteById(noteIdentifier)
-        }
-    }
 
-    fun navigateToEdit(){
+    private val _navigationEvent = MutableLiveData<Event<Destination>>()
+    val navigationEvent: LiveData<Event<Destination>>
+        get() = _navigationEvent
+
+
+    fun navigateToEdit() {
         _navigationEvent.value = Event(Destination.EDITFRAGMENT)
     }
-    fun navigateUp(){
-        _navigationEvent.value = Event(Destination.LISTFRAGMENT)
+
+    fun navigateUp() {
+        _navigationEvent.value = Event(Destination.UP)
     }
 
 }

@@ -64,7 +64,7 @@ class NotesDisplayFragment : Fragment() {
                     val action = NotesDisplayFragmentDirections.actionNotesDisplayFragmentToNotesEditFragment(args.noteIdentifier)
                     navController.navigate(action)
                 }
-                Destination.LISTFRAGMENT->{
+                Destination.UP->{
                     navController.navigateUp()
                 }
             }
