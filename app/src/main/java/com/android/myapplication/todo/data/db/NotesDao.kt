@@ -17,6 +17,9 @@ interface NotesDao{
     @Query("SELECT * FROM notes WHERE note_identifier = :noteId")
     suspend fun getNoteById(noteId:String):Notes?
 
+    @Query("SELECT * FROM notes WHERE note_identifier = :noteId")
+    fun getNoteLiveDataById(noteId:String):LiveData<Notes>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNote(note:Notes)
 
