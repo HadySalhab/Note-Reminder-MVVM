@@ -9,6 +9,7 @@ class NotesRepository (private val noteDao:NotesDao){
 
     fun getAllNotes()=noteDao.getNotes()
     fun getFavoriteNotes()=noteDao.getFavoriteNotes()
+    fun getNoteLiveDataById(noteId:String)=noteDao.getNoteLiveDataById(noteId)
 
     suspend fun delete(note: Notes){
         withContext(Dispatchers.IO){
