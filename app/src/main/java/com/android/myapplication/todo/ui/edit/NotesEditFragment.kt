@@ -195,8 +195,8 @@ class NotesEditFragment : Fragment(), DatePickerFragment.Callbacks, DeleteDialog
                 setTargetFragment(this@NotesEditFragment, REQUEST_PERMISSION_ANSWER_DIALOG)
                 show(this@NotesEditFragment.requireFragmentManager(), DIALOG_PERMISSION)
             }
-            if (viewModel.getPermissionPref()) {
-                viewModel.resetPermissionPref(false)
+            if (viewModel.permissionPref) {
+                viewModel.changePermissionPref()
             }
         } else {
             requestPermissions(arrayOf(Manifest.permission.CAMERA), PERMISSION_CODE)
@@ -229,13 +229,13 @@ class NotesEditFragment : Fragment(), DatePickerFragment.Callbacks, DeleteDialog
                             Toast.LENGTH_SHORT
                         ).show()
                     } else {
-                        if (viewModel.getPermissionPref()) {
+                        if (viewModel.permissionPref) {
                             showSnackBar(
                                 getString(R.string.snackbar_permission_message),
                                 getString(R.string.snackbar_permission_action_message)
                             )
                         } else {
-                            viewModel.resetPermissionPref(true)
+                            viewModel.changePermissionPref()
                         }
                     }
                 }
@@ -287,6 +287,11 @@ class NotesEditFragment : Fragment(), DatePickerFragment.Callbacks, DeleteDialog
             }
         }
 
+    }
+
+    override fun onPause() {
+        super.onPause()
+        viewModel.resetPermissionPref()
     }
 
 

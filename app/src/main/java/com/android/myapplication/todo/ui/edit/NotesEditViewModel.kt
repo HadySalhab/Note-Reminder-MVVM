@@ -34,9 +34,12 @@ class NotesEditViewModel(
         initializeNote()
     }
 
-    fun getPermissionPref() = PreferencesStorage.getStoredPermission(app)
-    fun resetPermissionPref(value: Boolean) {
-        PreferencesStorage.setStoredPermission(app, value)
+    var permissionPref = PreferencesStorage.getStoredPermission(app)
+    fun changePermissionPref(){
+        permissionPref = !permissionPref
+    }
+    fun resetPermissionPref() {
+        PreferencesStorage.setStoredPermission(app, permissionPref)
     }
 
 
