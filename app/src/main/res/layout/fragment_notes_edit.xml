@@ -60,7 +60,7 @@
                 android:id="@+id/edit_note_image"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:visibility="gone"
+                app:noteImage="@{viewModel.imageFile}"
                 app:layout_constraintDimensionRatio="h,2:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
@@ -150,9 +150,9 @@
             android:id="@+id/camera_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_camera"
+            app:resolveIntent="@{viewModel.intent}"
+            android:onClick="@{()->viewModel.launchCamera()}"
             app:layout_anchor="@id/bar"/>
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 

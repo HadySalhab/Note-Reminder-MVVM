@@ -21,7 +21,7 @@ class App : Application() {
         }
         single {
             val noteDb: NotesDataBase = get()
-            NotesRepository(noteDb.notesDao)
+            NotesRepository(noteDb.notesDao,androidContext())
         }
 
         viewModel {

@@ -19,4 +19,14 @@
     <string name="delete_message">Delete Note?</string>
     <string name="delete_dialog_positive_button">DELETE</string>
     <string name="delete_dialog_negative_button">CANCEL</string>
+    <string name="permission_denied">Permission Denied</string>
+
+
+    <string name="snackbar_permission_message">Permission is required to launch the camera</string>
+    <string name="snackbar_permission_action_message">OK</string>
+
+    <string name="permission_dialog_title">Permission Needed</string>
+    <string name="permission_dialog_message">Without this permission the app is unable to take picture for your note.Are you sure you want to deny this permission?</string>
+    <string name="permission_dialog_positive">I\'M SURE</string>
+    <string name="permission_dialog_negative">RE-TRY</string>
 </resources>

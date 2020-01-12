@@ -29,6 +29,7 @@ buildscript {
         viewPagerVersion = '1.0.0'
         workVersion = '2.1.0'
         koinVersion = "2.0.1"
+        pereferenceVersion="1.0.0"
     }
     repositories {
         google()

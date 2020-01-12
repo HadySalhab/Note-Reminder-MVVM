@@ -54,6 +54,7 @@
 
 
             <ImageView
+                app:noteImage="@{viewModel.imageFile}"
                 android:id="@+id/display_note_image"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
