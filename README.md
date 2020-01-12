@@ -42,7 +42,8 @@ The purpose of creating this application was to show how to implement latest fea
 <li>SnackBar</li>
 <li>Option menu</li>
 <li>Downloadable Fonts</li>
-</ul>
+ <li>Floating Action Button</li>
+ </ul>
 
 
 
