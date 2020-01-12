@@ -20,6 +20,7 @@ The purpose of creating this application was to show how to implement latest fea
 <h3><b>Android development concepts used: </b></h3>
 <ul>
 <li>Koin (for Dependency Injection)</li>
+<li>MVVM</li>
 <li>Navigation Component</li>
 <li>Material design styling</li>
 <li>Kotlin Coroutines</li>
