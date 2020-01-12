@@ -4,80 +4,78 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.android.myapplication.todo.ui.list.NotesListViewModel" />
 
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/notes_container_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        android:id="@+id/notes_container_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
 
-        <TextView
-            android:id="@+id/filtering_text"
-            android:layout_width="match_parent"
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/filtering_spinner"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:text="@{viewModel.category}"
-            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:layout_marginStart="@dimen/medium_margin"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:entries="@array/filter_spinner"
+            android:selectedItemPosition="@={viewModel._itemPosition}"
+            android:spinnerMode="dropdown"
             android:visibility="@{viewModel.isEmpty ? View.GONE : View.VISIBLE}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="@dimen/medium_margin"
-            android:layout_marginEnd="@dimen/medium_margin"
-            android:layout_marginTop="@dimen/medium_margin"
-            tools:text="All Notes" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
 
             android:id="@+id/recyclerview"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_marginTop="@dimen/small_margin"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/filtering_text"
+            app:layout_constraintTop_toBottomOf="@+id/filtering_spinner"
             app:notesList="@{viewModel.notes}"
             tools:itemCount="16"
             tools:listitem="@layout/notes_list_item" />
 
 
-            <LinearLayout
-                android:id="@+id/no_tasks_layout"
+        <LinearLayout
+            android:id="@+id/no_tasks_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="@{viewModel.isEmpty ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/no_tasks_icon"
+                android:layout_width="@dimen/empty_notes_reminder_image_dimens"
+                android:layout_height="@dimen/empty_notes_reminder_image_dimens"
+                android:layout_gravity="center"
+                android:contentDescription="@string/no_tasks_image_content_description"
+                app:placeHolder="@{viewModel.imagePlaceHolder}"
+                tools:srcCompat="@drawable/no_favorite_notes" />
+
+            <TextView
+                android:id="@+id/no_tasks_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="@{viewModel.isEmpty ? View.VISIBLE : View.GONE}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                >
-
-                <ImageView
-                    android:id="@+id/no_tasks_icon"
-                    android:layout_width="@dimen/empty_notes_reminder_image_dimens"
-                    android:layout_height="@dimen/empty_notes_reminder_image_dimens"
-                    android:layout_gravity="center"
-                    tools:srcCompat="@drawable/no_favorite_notes"
-                    app:placeHolder="@{viewModel.imagePlaceHolder}"
-                    android:contentDescription="@string/no_tasks_image_content_description" />
-
-                <TextView
-                    android:id="@+id/no_tasks_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="@dimen/list_item_padding"
-                    android:text="@{viewModel.textPlaceHolder}"
-                    tools:text="@string/no_favorite_notes_text_placeholder"
-                    />
-            </LinearLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/list_item_padding"
+                android:text="@{viewModel.textPlaceHolder}"
+                tools:text="@string/no_favorite_notes_text_placeholder" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

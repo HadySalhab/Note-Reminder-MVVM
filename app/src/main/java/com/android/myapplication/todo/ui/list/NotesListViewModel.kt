@@ -4,60 +4,66 @@ import android.app.Application
 import androidx.lifecycle.*
 import com.android.myapplication.todo.R
 import com.android.myapplication.todo.data.Notes
+import com.android.myapplication.todo.preferences.PreferencesStorage
 import com.android.myapplication.todo.repositories.NotesRepository
 import com.android.myapplication.todo.util.Filter
 import kotlinx.coroutines.launch
 
 
-class NotesListViewModel(private val notesRepository: NotesRepository,val app:Application) : AndroidViewModel(app){
-    private val _filter = MutableLiveData<Filter>(Filter.ALL)
-    val notes = Transformations.switchMap(_filter){filterValue->
-        when(filterValue){
-            Filter.ALL->{
+class NotesListViewModel(private val notesRepository: NotesRepository, val app: Application) :
+    AndroidViewModel(app) {
+    val _itemPosition = MutableLiveData<Int>(getInitialPosition())
+    fun getInitialPosition(): Int = PreferencesStorage.getStoredPosition(app)
+
+    private val _filter = Transformations.map(_itemPosition) { position ->
+
+        when (position) {
+            0 -> {
+                Filter.ALL
+            }
+            1 -> {
+                Filter.FAVORITES
+            }
+            else -> {
+                Filter.ALL
+            }
+        }
+    }
+    val notes = Transformations.switchMap(_filter) { filterValue ->
+        when (filterValue) {
+            Filter.ALL -> {
                 notesRepository.getAllNotes()
             }
-            Filter.FAVORITES->{
+            Filter.FAVORITES -> {
                 notesRepository.getFavoriteNotes()
             }
-            else->{
+            else -> {
                 notesRepository.getAllNotes()
             }
         }
 
     }
 
-    val isEmpty = Transformations.map(notes){
+    val isEmpty = Transformations.map(notes) {
         it.isEmpty()
     }
 
-    val category = Transformations.map(_filter){filterValue->
-        when(filterValue) {
+
+    val imagePlaceHolder = Transformations.map(_filter) { filterValue ->
+        when (filterValue) {
             Filter.ALL -> {
-                app.resources.getString(R.string.category_all)
+                app.resources.getDrawable(R.drawable.no_notes_logo, null)
             }
             Filter.FAVORITES -> {
-                app.resources.getString(R.string.category_favorites)
+                app.resources.getDrawable(R.drawable.no_favorite_notes, null)
             }
             else -> {
-                app.resources.getString(R.string.category_all)
+                app.resources.getDrawable(R.drawable.no_notes_logo, null)
             }
         }
     }
-    val imagePlaceHolder = Transformations.map(_filter){filterValue->
-        when(filterValue) {
-            Filter.ALL -> {
-                app.resources.getDrawable(R.drawable.no_notes_logo,null)
-            }
-            Filter.FAVORITES -> {
-                app.resources.getDrawable(R.drawable.no_favorite_notes,null)
-            }
-            else -> {
-                app.resources.getDrawable(R.drawable.no_notes_logo,null)
-            }
-        }
-    }
-    val textPlaceHolder=Transformations.map(_filter){filterValue->
-        when(filterValue) {
+    val textPlaceHolder = Transformations.map(_filter) { filterValue ->
+        when (filterValue) {
             Filter.ALL -> {
                 app.resources.getString(R.string.no_notes_text_placeholder)
             }
@@ -70,10 +76,16 @@ class NotesListViewModel(private val notesRepository: NotesRepository,val app:Ap
         }
     }
 
-    fun updateNote(note: Notes){
+
+    fun updateNote(note: Notes) {
         viewModelScope.launch {
             notesRepository.update(note)
         }
+    }
+
+
+    fun updateSelectedSpinnerPosition() {
+        PreferencesStorage.setStoredPosition(app, _itemPosition.value!!)
     }
 
 
