@@ -57,12 +57,15 @@
                 app:noteImage="@{viewModel.imageFile}"
                 android:id="@+id/display_note_image"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:visibility="gone"
-                app:layout_constraintDimensionRatio="h,2:1"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:adjustViewBounds="true"
+                android:cropToPadding="false"
+                android:scaleType="fitXY"
+
+                app:layout_constraintEnd_toEndOf="@id/guideline_end"
                 app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guideline_start"
                 app:layout_constraintTop_toBottomOf="@+id/display_ic_favorite" />
 
             <androidx.constraintlayout.widget.Guideline
