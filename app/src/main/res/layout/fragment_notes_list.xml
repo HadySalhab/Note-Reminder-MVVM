@@ -28,7 +28,6 @@
             android:entries="@array/filter_spinner"
             android:selectedItemPosition="@={viewModel._itemPosition}"
             android:spinnerMode="dropdown"
-            android:visibility="@{viewModel.isEmpty ? View.GONE : View.VISIBLE}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
