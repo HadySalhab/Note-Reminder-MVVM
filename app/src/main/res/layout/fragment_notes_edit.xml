@@ -8,145 +8,118 @@
             name="viewModel"
             type="com.android.myapplication.todo.ui.edit.NotesEditViewModel" />
     </data>
-
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/edit_coordinatorlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.google.android.material.appbar.AppBarLayout
-                android:id="@+id/edit_appbarLayout"
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/edit_toolbar"
+                style="@style/Widget.MaterialComponents.Toolbar.Primary"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:theme="@style/Theme.Todo.AppBarOverlay"
+                android:layout_height="?attr/actionBarSize"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
-
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/edit_toolbar"
-                    style="@style/Widget.MaterialComponents.Toolbar.Primary"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize">
-
-                    <TextView
-                        style="@style/Theme.Todo.Toolbar.Text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="?attr/actionBarSize"
-                        android:gravity="center_vertical"
-                        android:text="@string/app_name"
-                        android:textAppearance="@style/Theme.Todo.Toolbar.Text" />
-
-                </androidx.appcompat.widget.Toolbar>
-            </com.google.android.material.appbar.AppBarLayout>
-
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/edit_ic_favorite"
-                android:checked="@={viewModel._favoriteCheckBox}"
-                android:button="@drawable/ic_favorite_selector"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_appbarLayout"
-                />
-
-
-            <ImageView
-                android:id="@+id/edit_note_image"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:cropToPadding="false"
-                android:scaleType="fitXY"
-                app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="@+id/guideline_start"
-                app:layout_constraintTop_toBottomOf="@+id/edit_ic_favorite"
-                app:noteImage="@{viewModel.imageFile}" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_start"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="16dp" />
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_end"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_end="16dp" />
-
-            <TextView
-                android:text="@={viewModel._dateTextView}"
-                android:id="@+id/edit_note_date"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="end"
-                app:layout_constraintEnd_toEndOf="@id/guideline_end"
-                app:layout_constraintStart_toStartOf="@+id/guideline_start"
-                app:layout_constraintTop_toBottomOf="@id/edit_note_image"
-                tools:text="Created: 9/01/2020"
-
-                />
-
-
-                <EditText
-                    android:text="@={viewModel._titleEditText}"
-                    android:id="@+id/edit_title"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPersonName"
-                    android:hint="Title..."
-                    android:ems="10"
-                    app:layout_constraintEnd_toEndOf="@id/guideline_end"
-                    app:layout_constraintStart_toStartOf="@+id/guideline_start"
-                    app:layout_constraintTop_toBottomOf="@id/edit_note_date"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    tools:text="A day in Maroubra"
-                    />
-
+                <TextView
+                    style="@style/Theme.Todo.Toolbar.Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="?attr/actionBarSize"
+                    android:gravity="center_vertical"
+                    android:text="@string/app_name"
+                    android:textAppearance="@style/Theme.Todo.Toolbar.Text" />
+            </androidx.appcompat.widget.Toolbar>
             <ScrollView
-                android:layout_marginTop="8dp"
+                android:scrollbars="none"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_marginStart="@dimen/medium_margin"
+                android:layout_marginEnd="@dimen/medium_margin"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/guideline_end"
-                app:layout_constraintStart_toStartOf="@+id/guideline_start"
-                app:layout_constraintTop_toBottomOf="@id/edit_title">
-
-                <EditText
-                    android:text="@={viewModel._descriptionEditText}"
-                    android:background="@null"
-                    android:id="@+id/edit_description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_toolbar">
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textMultiLine"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                    android:hint="Description..."
-                    android:ems="10"
-                    tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                    />
+                    android:layout_height="wrap_content">
 
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/edit_ic_favorite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/small_margin"
+                        android:button="@drawable/ic_favorite_selector"
+                        android:checked="@={viewModel._favoriteCheckBox}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        />
 
+                    <ImageView
+                        android:id="@+id/edit_note_image"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:cropToPadding="false"
+                        android:scaleType="fitXY"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/edit_ic_favorite"
+                        app:noteImage="@{viewModel.imageFile}"
+                        tools:srcCompat="@tools:sample/avatars[0]" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/edit_note_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@={viewModel._dateTextView}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/edit_note_image"
+                        tools:text="9/01/2020" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_marginTop="@dimen/small_margin"
+                        android:id="@+id/edit_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@={viewModel._titleEditText}"
+                        android:hint="Title..."
+                        android:ems="10"
+                        android:textAppearance="?attr/textAppearanceHeadline6"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/edit_note_date"
+                        tools:text="A day in Maroubra" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_description"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@={viewModel._descriptionEditText}"
+                        android:inputType="textMultiLine|textCapSentences"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/edit_title"
+                        android:hint="Description..."
+                        android:ems="10"
+                        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
+                    <View
+                        android:id="@+id/view"
+                        app:layout_constraintTop_toBottomOf="@id/edit_description"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </ScrollView>
-
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-        <com.google.android.material.bottomappbar.BottomAppBar
-            android:id="@+id/bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/camera_fab"
@@ -154,8 +127,12 @@
             android:layout_height="wrap_content"
             app:resolveIntent="@{viewModel.intent}"
             android:onClick="@{()->viewModel.launchCamera()}"
-            app:layout_anchor="@id/bar"/>
+            app:layout_anchor="@id/edit_note_image"
+            app:layout_anchorGravity="bottom|end"
+            android:layout_margin="@dimen/medium_margin"
+            />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 
 
 </layout>
