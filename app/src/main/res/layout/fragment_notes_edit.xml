@@ -130,6 +130,11 @@
             app:layout_anchorGravity="bottom|end"
             android:layout_margin="@dimen/medium_margin"
             />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
