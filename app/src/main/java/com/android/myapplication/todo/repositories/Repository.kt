@@ -2,12 +2,18 @@ package com.android.myapplication.todo.repositories
 
 import android.content.Context
 import com.android.myapplication.todo.data.Notes
+import com.android.myapplication.todo.data.Reminders
 import com.android.myapplication.todo.data.db.NotesDao
+import com.android.myapplication.todo.data.db.RemindersDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File
 
-class NotesRepository(private val noteDao: NotesDao, private val context: Context) {
+class Repository(
+    private val noteDao: NotesDao,
+    private val reminderDao: RemindersDao,
+    private val context: Context
+) {
 
     private val filesDir = context.applicationContext.filesDir
 
@@ -47,4 +53,9 @@ class NotesRepository(private val noteDao: NotesDao, private val context: Contex
 
     fun getPhotoFile(note: Notes): File = File(filesDir, note.photoFileName)
 
+    suspend fun getReminderById(reminderId: String): Reminders? {
+        return withContext(Dispatchers.IO) {
+            reminderDao.getReminderById(reminderId)
+        }
+    }
 }

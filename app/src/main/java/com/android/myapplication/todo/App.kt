@@ -1,11 +1,12 @@
 package com.android.myapplication.todo
 
 import android.app.Application
-import com.android.myapplication.todo.data.db.NotesDataBase
-import com.android.myapplication.todo.repositories.NotesRepository
+import com.android.myapplication.todo.data.db.NoteAndRemindersDB
+import com.android.myapplication.todo.repositories.Repository
 import com.android.myapplication.todo.ui.HomeViewPagerViewModel
 import com.android.myapplication.todo.ui.display.NotesDisplayViewModel
 import com.android.myapplication.todo.ui.edit.NotesEditViewModel
+import com.android.myapplication.todo.ui.edit.ReminderEditViewModel
 import com.android.myapplication.todo.ui.list.NotesListViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -17,11 +18,11 @@ class App : Application() {
     private val koinModule = module {
         single {
             //Database
-            NotesDataBase.getInstance(androidContext())
+            NoteAndRemindersDB.getInstance(androidContext())
         }
         single {
-            val noteDb: NotesDataBase = get()
-            NotesRepository(noteDb.notesDao,androidContext())
+            val db: NoteAndRemindersDB = get()
+            Repository(db.notesDao, db.remindersDao, androidContext())
         }
 
         viewModel {
@@ -35,7 +36,10 @@ class App : Application() {
             NotesDisplayViewModel(get(), noteId)
         }
         viewModel { (noteId: String) ->
-            NotesEditViewModel(get(), noteId,this@App)
+            NotesEditViewModel(get(), noteId, this@App)
+        }
+        viewModel { (reminderId: String) ->
+            ReminderEditViewModel(get(), reminderId, this@App)
         }
 
     }

@@ -11,13 +11,14 @@ private const val NOTES_DB_NAME = "notes.db"
 
 
 @Database(entities = [Notes::class,Reminders::class], version = 1, exportSchema = false)
-abstract class NotesDataBase : RoomDatabase() {
+abstract class NoteAndRemindersDB : RoomDatabase() {
     abstract val notesDao: NotesDao
+    abstract val remindersDao:RemindersDao
 
     companion object {
-        fun getInstance(context: Context): NotesDataBase = Room.databaseBuilder(
+        fun getInstance(context: Context): NoteAndRemindersDB = Room.databaseBuilder(
             context.applicationContext,
-            NotesDataBase::class.java, NOTES_DB_NAME
+            NoteAndRemindersDB::class.java, NOTES_DB_NAME
         ).fallbackToDestructiveMigration().build()
     }
 }

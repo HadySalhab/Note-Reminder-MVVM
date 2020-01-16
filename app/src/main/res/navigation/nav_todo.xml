@@ -53,5 +53,10 @@
         android:name="com.android.myapplication.todo.ui.edit.ReminderEditFragment"
         android:label="ReminderEditFragment"
         tools:layout="@layout/fragment_edit_reminder"
-        />
+        >
+        <argument
+            android:name="reminderId"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 </navigation>

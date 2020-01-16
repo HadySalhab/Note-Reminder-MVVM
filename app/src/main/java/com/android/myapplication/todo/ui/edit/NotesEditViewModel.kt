@@ -5,9 +5,8 @@ import android.net.Uri
 import android.util.Log
 import androidx.core.content.FileProvider
 import androidx.lifecycle.*
-import androidx.preference.PreferenceManager
 import com.android.myapplication.todo.data.Notes
-import com.android.myapplication.todo.repositories.NotesRepository
+import com.android.myapplication.todo.repositories.Repository
 import kotlinx.coroutines.launch
 import com.android.myapplication.todo.R
 import com.android.myapplication.todo.preferences.PreferencesStorage
@@ -15,7 +14,7 @@ import com.android.myapplication.todo.util.*
 import java.io.File
 
 class NotesEditViewModel(
-    private val notesRepository: NotesRepository,
+    private val repository: Repository,
     private val noteIdentifier: String?,
     private val app: Application
 ) : AndroidViewModel(app) {
@@ -77,7 +76,7 @@ class NotesEditViewModel(
     fun initializeNote() {
         viewModelScope.launch {
             if (noteIdentifier != null) {
-                editableNote = notesRepository.getNoteById(noteIdentifier) ?: Notes()
+                editableNote = repository.getNoteById(noteIdentifier) ?: Notes()
             } else {
                 editableNote = Notes()
             }
@@ -91,7 +90,7 @@ class NotesEditViewModel(
         _descriptionEditText.value = editableNote.description
         _favoriteCheckBox.value = editableNote.isFavorite
         _dateTextView.value = editableNote.date
-        _imageFile.value = notesRepository.getPhotoFile(editableNote)
+        _imageFile.value = repository.getPhotoFile(editableNote)
     }
 
     override fun onCleared() {
@@ -110,7 +109,7 @@ class NotesEditViewModel(
 
     fun deleteNote() {
         viewModelScope.launch {
-            notesRepository.delete(editableNote)
+            repository.delete(editableNote)
         }
 
     }
@@ -122,9 +121,9 @@ class NotesEditViewModel(
             updateNote()
             viewModelScope.launch {
                 if (noteIdentifier == null) {
-                    notesRepository.insert(editableNote)
+                    repository.insert(editableNote)
                 } else {
-                    notesRepository.update(editableNote)
+                    repository.update(editableNote)
                 }
             }
             _navigationEvent.value = Event(Destination.UP)
@@ -170,6 +169,6 @@ class NotesEditViewModel(
 
     }
     fun updatePhoto(){
-        _imageFile.value = notesRepository.getPhotoFile(editableNote)
+        _imageFile.value = repository.getPhotoFile(editableNote)
     }
 }

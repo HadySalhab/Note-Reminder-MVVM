@@ -5,11 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.android.myapplication.todo.data.Notes
-import com.android.myapplication.todo.repositories.NotesRepository
+import com.android.myapplication.todo.repositories.Repository
 import com.android.myapplication.todo.util.Event
 import kotlinx.coroutines.launch
 
-class HomeViewPagerViewModel(private val notesRepository: NotesRepository) : ViewModel() {
+class HomeViewPagerViewModel(private val repository: Repository) : ViewModel() {
 
     private val _fabNavListenner= MutableLiveData<Event<Unit>>()
     val fabNavListenner:LiveData<Event<Unit>>
@@ -22,7 +22,7 @@ class HomeViewPagerViewModel(private val notesRepository: NotesRepository) : Vie
 
      fun insert(note: Notes){
         viewModelScope.launch {
-            notesRepository.insert(note)
+            repository.insert(note)
         }
     }
 

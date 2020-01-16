@@ -5,12 +5,12 @@ import androidx.lifecycle.*
 import com.android.myapplication.todo.R
 import com.android.myapplication.todo.data.Notes
 import com.android.myapplication.todo.preferences.PreferencesStorage
-import com.android.myapplication.todo.repositories.NotesRepository
+import com.android.myapplication.todo.repositories.Repository
 import com.android.myapplication.todo.util.Filter
 import kotlinx.coroutines.launch
 
 
-class NotesListViewModel(private val notesRepository: NotesRepository, val app: Application) :
+class NotesListViewModel(private val repository: Repository, val app: Application) :
     AndroidViewModel(app) {
     val _itemPosition = MutableLiveData<Int>(getInitialPosition())
     fun getInitialPosition(): Int = PreferencesStorage.getStoredPosition(app)
@@ -32,13 +32,13 @@ class NotesListViewModel(private val notesRepository: NotesRepository, val app: 
     val notes = Transformations.switchMap(_filter) { filterValue ->
         when (filterValue) {
             Filter.ALL -> {
-                notesRepository.getAllNotes()
+                repository.getAllNotes()
             }
             Filter.FAVORITES -> {
-                notesRepository.getFavoriteNotes()
+                repository.getFavoriteNotes()
             }
             else -> {
-                notesRepository.getAllNotes()
+                repository.getAllNotes()
             }
         }
 
@@ -79,7 +79,7 @@ class NotesListViewModel(private val notesRepository: NotesRepository, val app: 
 
     fun updateNote(note: Notes) {
         viewModelScope.launch {
-            notesRepository.update(note)
+            repository.update(note)
         }
     }
 
