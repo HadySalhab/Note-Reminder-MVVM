@@ -64,6 +64,10 @@ class HomeViewPagerFragment : Fragment(),NotesListFragment.Callbacks {
                     val action = HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToNotesEditFragment(null)
                     findNavController().navigate(action)
                 }
+                REMINDERS_LIST_PAGE_INDEX->{
+                   val action = HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToReminderEditFragment()
+                    findNavController().navigate(action)
+                }
 
             }
 

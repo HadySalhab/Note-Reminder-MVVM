@@ -18,6 +18,10 @@
         <action
             android:id="@+id/action_homeViewPagerFragment_to_notesDisplayFragment"
             app:destination="@id/notesDisplayFragment" />
+        <action
+            android:id="@+id/action_homeViewPagerFragment_to_reminderEditFragment"
+            app:destination="@id/reminderEditFragment"
+            app:popUpTo="@+id/homeViewPagerFragment" />
     </fragment>
     <fragment
         android:id="@+id/notesEditFragment"
@@ -44,4 +48,10 @@
             android:name="note_identifier"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/reminderEditFragment"
+        android:name="com.android.myapplication.todo.ui.edit.ReminderEditFragment"
+        android:label="ReminderEditFragment"
+        tools:layout="@layout/fragment_edit_reminder"
+        />
 </navigation>
