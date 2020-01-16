@@ -60,7 +60,7 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutinesVersion"
     implementation "androidx.preference:preference-ktx:$rootProject.pereferenceVersion"
     implementation 'com.squareup.picasso:picasso:2.71828'
-
+    implementation 'com.wdullaer:materialdatetimepicker:1.2.1'
     //koin
     implementation "org.koin:koin-core:$koinVersion"
     implementation "org.koin:koin-android:$koinVersion"

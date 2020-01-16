@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">DailyNote</string>
-
+    <string name="app_name_reminder">Reminder</string>
     <string name="my_notes_list_title" translation_description="Title for the 'My Notes'screen where the user can see the list of notes that have been added.">My Notes</string>
     <string name="my_reminders_list_title" translation_description="Title for the 'My Reminders'screen where the user can see the list of reminders that have been added.">My Reminders</string>
 
