@@ -120,7 +120,7 @@ class NotesEditFragment : Fragment(), DatePickerFragment.Callbacks, DeleteDialog
 
     fun showSnackBar(message: String, actionMessage: String?) {
         val snackbar = Snackbar.make(
-            requireActivity().findViewById<CoordinatorLayout>(R.id.edit_coordinatorlayout),
+            binding.editCoordinatorlayout,
             message,
             Snackbar.LENGTH_LONG
         )
