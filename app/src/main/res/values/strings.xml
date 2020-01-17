@@ -12,11 +12,15 @@
     <string name="category_all">All Notes</string>
     <string name="category_favorites">Favorite Notes</string>
     <string name="optionmenu_save">Save Note</string>
+    <string name="optionmenureminder_check">Save Reminder</string>
     <string name="optionmenu_datepicker">Note Date</string>
     <string name="delete_note">Delete Note</string>
+    <string name="delete_reminder">Delete Reminder</string>
     <string name="snackbartext_emptynote">Notes cannot be empty</string>
+    <string name="snackbartext_emptyReminder">Reminder Title cannot be empty</string>
     <string name="edit_note">Edit Note</string>
-    <string name="delete_message">Delete Note?</string>
+    <string name="delete_note_message">Delete Note?</string>
+    <string name="delete_reminder_message">Delete Reminder?</string>
     <string name="delete_dialog_positive_button">DELETE</string>
     <string name="delete_dialog_negative_button">CANCEL</string>
     <string name="permission_denied">Permission Denied</string>

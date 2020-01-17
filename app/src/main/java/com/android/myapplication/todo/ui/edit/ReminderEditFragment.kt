@@ -2,23 +2,28 @@ package com.android.myapplication.todo.ui.edit
 
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.android.myapplication.todo.R
 import com.android.myapplication.todo.databinding.FragmentEditReminderBinding
+import com.android.myapplication.todo.ui.dialogs.DeleteDialogFragment
+import com.android.myapplication.todo.util.DIALOG_DELETE
+import com.android.myapplication.todo.util.Destination
+import com.android.myapplication.todo.util.EventObserver
+import com.android.myapplication.todo.util.REQUEST_DELETE_ANSWER
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 /**
  * A simple [Fragment] subclass.
  */
-class ReminderEditFragment : Fragment() {
+class ReminderEditFragment : Fragment(),DeleteDialogFragment.Callbacks {
     private val args by navArgs<ReminderEditFragmentArgs>()
     private lateinit var binding: FragmentEditReminderBinding
     private lateinit var navController: NavController
@@ -35,8 +40,74 @@ class ReminderEditFragment : Fragment() {
         binding = FragmentEditReminderBinding.inflate(layoutInflater,container,false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        setuptoolbar()
+        setHasOptionsMenu(true)
         return binding.root
     }
+    fun setuptoolbar() {
+        (requireActivity() as AppCompatActivity).apply {
+            setSupportActionBar(binding.reminderToolbar)
+            appBarConfig = AppBarConfiguration(navController.graph)
+            setupActionBarWithNavController(navController, appBarConfig)
+            supportActionBar?.apply {
+                setDisplayShowTitleEnabled(false)
+                setHomeAsUpIndicator(R.drawable.ic_close)
+            }
+            }
+        }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel.navigationEvent.observe(viewLifecycleOwner, EventObserver { destination ->
+            when (destination) {
+                Destination.UP -> {
+                    navController.navigateUp()
+                }
+            }
+        })
+        viewModel.showDeleteDialogEvent.observe(viewLifecycleOwner, EventObserver {message->
+            DeleteDialogFragment.newInstance(message).apply {
+                setTargetFragment(this@ReminderEditFragment, REQUEST_DELETE_ANSWER)
+                show(this@ReminderEditFragment.requireFragmentManager(), DIALOG_DELETE)
+            }
+        })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.edit_reminder_optionmenu,menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+
+            R.id.edit_reminder_delete -> {
+                viewModel.showDeleteDialog()
+                true
+            }
+
+            R.id.edit_reminder_check -> {
+                viewModel.saveReminder()
+                true
+            }
+
+            android.R.id.home -> {
+                viewModel.navigateUp()
+                true
+            }
+
+            else->{
+                super.onOptionsItemSelected(item)
+            }
+        }
+
+    }
+
+    override fun onPositiveButtonClick() {
+        viewModel.deleteAndNavigateToList()
+    }
 
 }
+
+
+
