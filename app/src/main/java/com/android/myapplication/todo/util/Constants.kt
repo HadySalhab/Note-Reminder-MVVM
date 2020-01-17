@@ -5,6 +5,7 @@ const val REQUEST_PHOTO = 2
 const val REQUEST_DELETE_ANSWER = 1
 const val REQUEST_PERMISSION_ANSWER_DIALOG = 10
 const val ARG_NOTE_DATE = "date"
+const val ARG_DELETE_MESSAGE = "delete_message"
 const val DIALOG_DATE = "DialogDate"
 const val DIALOG_DELETE = "DialogDelete"
 const val DIALOG_PERMISSION = "DialogPermission"
