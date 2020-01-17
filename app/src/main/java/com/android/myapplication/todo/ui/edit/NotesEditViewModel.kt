@@ -55,8 +55,8 @@ class NotesEditViewModel(
     val showDatePickerEvent: LiveData<Event<String>>
         get() = _showDatePickerEvent
 
-    private val _showDeletDialogEvent = MutableLiveData<Event<Unit>>()
-    val showDeleteDialogEvent: LiveData<Event<Unit>>
+    private val _showDeletDialogEvent = MutableLiveData<Event<String>>()
+    val showDeleteDialogEvent: LiveData<Event<String>>
         get() = _showDeletDialogEvent
 
     private val _launchCameraEvent = MutableLiveData<Event<Uri>>()
@@ -149,7 +149,7 @@ class NotesEditViewModel(
     }
 
     fun showDeleteDialog() {
-        _showDeletDialogEvent.value = Event(Unit)
+        _showDeletDialogEvent.value = Event(app.getString(R.string.delete_note_message))
     }
 
     fun updateDateTextView(date: String) {

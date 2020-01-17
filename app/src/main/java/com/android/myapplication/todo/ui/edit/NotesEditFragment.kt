@@ -106,8 +106,8 @@ class NotesEditFragment : Fragment(), DatePickerFragment.Callbacks, DeleteDialog
                 show(this@NotesEditFragment.requireFragmentManager(), DIALOG_DATE)
             }
         })
-        viewModel.showDeleteDialogEvent.observe(viewLifecycleOwner, EventObserver {
-            DeleteDialogFragment().apply {
+        viewModel.showDeleteDialogEvent.observe(viewLifecycleOwner, EventObserver {message->
+            DeleteDialogFragment.newInstance(message).apply {
                 setTargetFragment(this@NotesEditFragment, REQUEST_DELETE_ANSWER)
                 show(this@NotesEditFragment.requireFragmentManager(), DIALOG_DELETE)
             }
