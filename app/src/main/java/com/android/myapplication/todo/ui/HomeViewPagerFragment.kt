@@ -16,8 +16,10 @@ import com.android.myapplication.todo.adapters.DailyNotePagerAdapter
 import com.android.myapplication.todo.adapters.NOTES_LIST_PAGE_INDEX
 import com.android.myapplication.todo.adapters.REMINDERS_LIST_PAGE_INDEX
 import com.android.myapplication.todo.data.Notes
+import com.android.myapplication.todo.data.Reminders
 import com.android.myapplication.todo.databinding.FragmentHomeViewPagerBinding
 import com.android.myapplication.todo.ui.list.NotesListFragment
+import com.android.myapplication.todo.ui.list.RemindersListFragment
 import com.android.myapplication.todo.util.EventObserver
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -27,7 +29,7 @@ import java.lang.IndexOutOfBoundsException
 /**
  * A simple [Fragment] subclass.
  */
-class HomeViewPagerFragment : Fragment(),NotesListFragment.Callbacks {
+class HomeViewPagerFragment : Fragment(),NotesListFragment.Callbacks,RemindersListFragment.Callbacks {
     private lateinit var tabLayout:TabLayout
     private lateinit var viewPager:ViewPager2
     private val viewPagerViewModel:HomeViewPagerViewModel by viewModel()
@@ -90,6 +92,11 @@ class HomeViewPagerFragment : Fragment(),NotesListFragment.Callbacks {
 
     override fun onNoteClick(note: Notes) {
         val action = HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToNotesDisplayFragment(note.noteIdentifier)
+        navController.navigate(action)
+    }
+
+    override fun onReminderClick(reminder: Reminders) {
+        val action = HomeViewPagerFragmentDirections.actionHomeViewPagerFragmentToReminderEditFragment(reminder.reminderIndentifier)
         navController.navigate(action)
     }
 

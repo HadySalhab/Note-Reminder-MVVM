@@ -66,11 +66,14 @@
                 android:layout_marginEnd="16dp"
                 android:ems="10"
                 android:hint="Reminder Title..."
-                android:inputType="textPersonName"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:inputType="textCapSentences"
                 android:textAppearance="?attr/textAppearanceHeadline5"
                 app:layout_constraintBottom_toTopOf="@+id/guideline"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                tools:text="call rony"
                 android:text="@={viewModel._titleEditText}"
                 />
 

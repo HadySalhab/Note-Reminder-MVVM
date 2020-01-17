@@ -8,6 +8,7 @@ import com.android.myapplication.todo.ui.display.NotesDisplayViewModel
 import com.android.myapplication.todo.ui.edit.NotesEditViewModel
 import com.android.myapplication.todo.ui.edit.ReminderEditViewModel
 import com.android.myapplication.todo.ui.list.NotesListViewModel
+import com.android.myapplication.todo.ui.list.RemindersListViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -40,6 +41,9 @@ class App : Application() {
         }
         viewModel { (reminderId: String) ->
             ReminderEditViewModel(get(), reminderId, this@App)
+        }
+        viewModel {
+            RemindersListViewModel(get())
         }
 
     }

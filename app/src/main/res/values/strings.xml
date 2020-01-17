@@ -24,6 +24,9 @@
     <string name="delete_dialog_positive_button">DELETE</string>
     <string name="delete_dialog_negative_button">CANCEL</string>
     <string name="permission_denied">Permission Denied</string>
+    <string name="all_reminders">All Reminders</string>
+    <string name="reminder_date_time_text">%1$s,%2$s</string>
+    <string name="reminder_repeat_text">Every %1$d %1$s(s)</string>
 
 
     <string name="snackbar_permission_message">Permission is required to launch the camera</string>

@@ -11,6 +11,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.android.myapplication.todo.R
 import com.android.myapplication.todo.data.Notes
+import com.android.myapplication.todo.data.Reminders
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -22,6 +23,12 @@ import java.io.File
 fun RecyclerView.submitList(notes: List<Notes>?) {
     val adapter = this.adapter as NotesListAdapter
     adapter.submitList(notes)
+}
+
+@BindingAdapter("remindersList")
+fun RecyclerView.submitReminderList(reminders: List<Reminders>?) {
+    val adapter = this.adapter as RemindersListAdapter
+    adapter.submitList(reminders)
 }
 
 @BindingAdapter("placeHolder")

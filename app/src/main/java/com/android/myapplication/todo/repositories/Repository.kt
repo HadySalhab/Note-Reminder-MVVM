@@ -53,6 +53,11 @@ class Repository(
 
     fun getPhotoFile(note: Notes): File = File(filesDir, note.photoFileName)
 
+
+
+
+    fun getAllReminders() = reminderDao.getReminders()
+
     suspend fun getReminderById(reminderId: String): Reminders? {
         return withContext(Dispatchers.IO) {
             reminderDao.getReminderById(reminderId)

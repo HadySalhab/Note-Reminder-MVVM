@@ -1,66 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/reminder_isactive"
-        android:layout_width="wrap_content"
+    <data>
+        <variable
+            name="reminder"
+            type="com.android.myapplication.todo.data.Reminders" />
+        <variable
+            name="viewHolder"
+            type="com.android.myapplication.todo.adapters.RemindersListAdapter.RemindersViewHolder" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/small_margin"
-        android:layout_marginBottom="@dimen/small_margin"
-        android:button="@drawable/ic_alarm_selector"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.727" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/item_reminder_title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?attr/textAppearanceHeadline5"
-        app:layout_constraintBottom_toTopOf="@+id/item_reminder_time_date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/reminder_isactive"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
-        tools:text="Reminder 1" />
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/reminder_isactive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_marginBottom="@dimen/small_margin"
+            android:button="@drawable/ic_alarm_selector"
+            android:onCheckedChanged="@{()->viewHolder.onCheckEventListener.invoke(reminder)}"
+            android:checked="@{reminder.active}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.727" />
 
-    <TextView
-        android:id="@+id/item_reminder_time_date"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?attr/textAppearanceBody1"
-        app:layout_constraintBottom_toTopOf="@+id/item_reminder_repeat_info"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/reminder_isactive"
-        app:layout_constraintTop_toBottomOf="@+id/item_reminder_title"
-        tools:text="Reminder 1" />
+        <TextView
+            android:id="@+id/item_reminder_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceHeadline5"
+            android:text="@{reminder.title}"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:layout_marginTop="@dimen/small_margin"
+            app:layout_constraintBottom_toTopOf="@+id/item_reminder_time_date"
+            app:layout_constraintEnd_toEndOf="@id/guideline_end"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/reminder_isactive"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="Reminder 1" />
 
-    <TextView
-        android:id="@+id/item_reminder_repeat_info"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?attr/textAppearanceBody1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/reminder_isactive"
-        app:layout_constraintTop_toBottomOf="@+id/item_reminder_time_date"
-        tools:text="Reminder 1" />
+        <TextView
+            android:id="@+id/item_reminder_time_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceBody1"
+            android:text="@{@string/reminder_date_time_text(reminder.date,reminder.time)}"
+            app:layout_constraintBottom_toTopOf="@+id/item_reminder_repeat_info"
+            app:layout_constraintEnd_toEndOf="@id/guideline_end"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/reminder_isactive"
+            app:layout_constraintTop_toBottomOf="@+id/item_reminder_title"
+            tools:text="Reminder 1" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="@dimen/medium_margin" />
+        <TextView
+            android:id="@+id/item_reminder_repeat_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/small_margin"
+            android:textAppearance="?attr/textAppearanceBody1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline_end"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/reminder_isactive"
+            app:layout_constraintTop_toBottomOf="@+id/item_reminder_time_date"
+            android:text="@{@string/reminder_repeat_text(reminder.repeatValue,reminder.repeatUnit)}"
+            tools:text="Reminder 1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/medium_margin" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="16dp" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
