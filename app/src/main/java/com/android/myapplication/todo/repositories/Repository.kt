@@ -58,4 +58,21 @@ class Repository(
             reminderDao.getReminderById(reminderId)
         }
     }
+
+    suspend fun insert(reminder: Reminders) {
+        withContext(Dispatchers.IO) {
+            reminderDao.insertReminder(reminder)
+        }
+    }
+
+    suspend fun update(reminder: Reminders) {
+        withContext(Dispatchers.IO) {
+            reminderDao.updateReminder(reminder)
+        }
+    }
+    suspend fun delete(reminder: Reminders) {
+        withContext(Dispatchers.IO) {
+            reminderDao.delete(reminder)
+        }
+    }
 }
