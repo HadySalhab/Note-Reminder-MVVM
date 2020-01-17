@@ -10,6 +10,10 @@
             name="viewModel"
             type="com.android.myapplication.todo.ui.edit.ReminderEditViewModel" />
     </data>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/reminder_edit_coordinatorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -304,4 +308,5 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </RelativeLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
