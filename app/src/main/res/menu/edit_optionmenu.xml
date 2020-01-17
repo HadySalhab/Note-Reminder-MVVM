@@ -2,11 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/edit_item_save"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_save"
-        android:title="@string/optionmenu_save"/>
-    <item
         android:id="@+id/edit_item_date"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_date"
@@ -16,5 +11,10 @@
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_delete"
         android:title="@string/delete_note"/>
+    <item
+        android:id="@+id/edit_item_save"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_save"
+        android:title="@string/optionmenu_save"/>
 
 </menu>
