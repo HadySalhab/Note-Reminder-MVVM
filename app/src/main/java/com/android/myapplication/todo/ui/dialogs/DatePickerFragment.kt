@@ -10,7 +10,7 @@ import com.android.myapplication.todo.util.ARG_NOTE_DATE
 import java.text.SimpleDateFormat
 import java.util.*
 
-class DatePickerFragment:DialogFragment(){
+class DatePickerFragment private constructor():DialogFragment(){
     interface Callbacks {
         fun onDateSelected(date: String)
     }
