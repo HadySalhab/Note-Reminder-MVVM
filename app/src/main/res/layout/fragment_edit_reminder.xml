@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="android.view.View"/>
         <variable
             name="viewModel"
             type="com.android.myapplication.todo.ui.edit.ReminderEditViewModel" />
@@ -222,6 +222,7 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:visibility="@{viewModel._switchRepeat ? View.VISIBLE : View.GONE}"
                         android:background="?attr/selectableItemBackground"
                         android:onClick="@{()->viewModel.showEditDialog()}"
                         android:layout_width="match_parent"
@@ -267,6 +268,7 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:visibility="@{viewModel._switchRepeat ? View.VISIBLE : View.GONE}"
                         android:background="?attr/selectableItemBackground"
                         android:onClick="@{()->viewModel.showListDialog()}"
                         android:layout_width="match_parent"

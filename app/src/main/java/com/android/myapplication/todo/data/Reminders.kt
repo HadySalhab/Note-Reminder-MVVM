@@ -25,6 +25,6 @@ data class Reminders(
     @ColumnInfo(name = "repeat_unit")
     var repeatUnit:String="Day",
     @ColumnInfo(name = "active")
-    var isActive:Boolean = false
+    var isActive:Boolean = true
 
     )
