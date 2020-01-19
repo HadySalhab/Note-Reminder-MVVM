@@ -1,6 +1,7 @@
 package com.android.myapplication.todo.ui.list
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
 import com.android.myapplication.todo.R
 import com.android.myapplication.todo.data.Notes
@@ -12,6 +13,10 @@ import kotlinx.coroutines.launch
 
 class NotesListViewModel(private val repository: Repository, val app: Application) :
     AndroidViewModel(app) {
+    companion object {
+        private const val TAG = "NotesListViewModel"
+    }
+    
     val _itemPosition = MutableLiveData<Int>(getInitialPosition())
     fun getInitialPosition(): Int = PreferencesStorage.getStoredPosition(app)
 
@@ -80,6 +85,7 @@ class NotesListViewModel(private val repository: Repository, val app: Applicatio
     fun updateNote(note: Notes) {
         viewModelScope.launch {
             repository.update(note)
+            Log.d(TAG, "updateNote: ")
         }
     }
 

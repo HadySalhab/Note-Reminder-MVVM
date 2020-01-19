@@ -106,14 +106,6 @@ class NotesEditViewModel(
         Log.d(TAG, "showlog: identifier is ${editableNote.noteIdentifier}")
     }
 
-
-    fun deleteNote() {
-        viewModelScope.launch {
-            repository.delete(editableNote)
-        }
-
-    }
-
     fun saveNote() {
         if (_titleEditText.value.isNullOrEmpty() || _descriptionEditText.value.isNullOrEmpty()) {
             _snackBarEvent.value = Event(app.getString(R.string.snackbartext_emptynote))
@@ -125,8 +117,8 @@ class NotesEditViewModel(
                 } else {
                     repository.update(editableNote)
                 }
+                _navigationEvent.value = Event(Destination.UP)
             }
-            _navigationEvent.value = Event(Destination.UP)
         }
     }
 
@@ -157,8 +149,10 @@ class NotesEditViewModel(
     }
 
     fun deleteAndNavigateToList() {
-        deleteNote()
-        _navigationEvent.value = Event(Destination.VIEWPAGERFRAGMENT)
+        viewModelScope.launch {
+            repository.delete(editableNote)
+            _navigationEvent.value = Event(Destination.VIEWPAGERFRAGMENT)
+        }
     }
 
     fun launchCamera() {

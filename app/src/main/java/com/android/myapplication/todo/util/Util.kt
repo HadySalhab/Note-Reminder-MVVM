@@ -15,3 +15,4 @@ enum class Filter {
     ALL,
     FAVORITES
 }
+

@@ -31,6 +31,7 @@ class RemindersListFragment : Fragment() {
         val newReminder = reminder.copy(isActive = !reminder.isActive)
         viewModel.updateReminder(newReminder)
     }
+
     private val onReminderClickListener: (Reminders) -> Unit = { reminder ->
         parentFragment?.let { parentFragment ->
             (parentFragment as Callbacks).onReminderClick(reminder)

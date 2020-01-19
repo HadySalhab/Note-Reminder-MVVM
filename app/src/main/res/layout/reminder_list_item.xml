@@ -25,7 +25,7 @@
             android:layout_marginTop="@dimen/small_margin"
             android:layout_marginBottom="@dimen/small_margin"
             android:button="@drawable/ic_alarm_selector"
-            android:onCheckedChanged="@{()->viewHolder.onCheckEventListener.invoke(reminder)}"
+            android:onClick="@{()->viewHolder.onCheckEventListener.invoke(reminder)}"
             android:checked="@{reminder.active}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline2"

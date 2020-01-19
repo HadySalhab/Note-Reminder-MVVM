@@ -5,6 +5,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.graphics.Color
 import android.os.Build
+import androidx.core.content.ContextCompat
 import com.android.myapplication.todo.data.db.NoteAndRemindersDB
 import com.android.myapplication.todo.repositories.Repository
 import com.android.myapplication.todo.ui.HomeViewPagerViewModel
@@ -47,7 +48,7 @@ class App : Application() {
             ReminderEditViewModel(get(), reminderId, this@App)
         }
         viewModel {
-            RemindersListViewModel(get())
+            RemindersListViewModel(get(),this@App)
         }
 
     }
@@ -77,7 +78,7 @@ class App : Application() {
                 enableVibration(true)
             }
             notificationChannel.description = description
-            val notificationManager = this.getSystemService(
+            val notificationManager = ContextCompat.getSystemService(this.applicationContext,
                 NotificationManager::class.java
             ) as NotificationManager
             notificationManager.createNotificationChannel(notificationChannel)

@@ -1,16 +1,20 @@
 package com.android.myapplication.todo.ui.edit
 
+import android.annotation.SuppressLint
+import android.app.AlarmManager
 import android.app.Application
+import android.content.Context
 import android.util.Log
+import androidx.core.app.AlarmManagerCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.android.myapplication.todo.R
 import com.android.myapplication.todo.data.Reminders
+import com.android.myapplication.todo.receiver.AlarmReceiver
 import com.android.myapplication.todo.repositories.Repository
-import com.android.myapplication.todo.util.Destination
-import com.android.myapplication.todo.util.Event
+import com.android.myapplication.todo.util.*
 import kotlinx.coroutines.launch
 
 class ReminderEditViewModel(
@@ -18,7 +22,10 @@ class ReminderEditViewModel(
     private val reminderIdentifier: String?,
     private val app: Application
 ) : AndroidViewModel(app) {
+
     private lateinit var editableReminder: Reminders
+
+    private val alarmManager = app.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
     companion object {
         private const val TAG = "ReminderEditViewModel"
@@ -32,19 +39,19 @@ class ReminderEditViewModel(
     val _switchRepeat = MutableLiveData<Boolean>() //2-way binding
 
     private val _dateText = MutableLiveData<String>()
-    val dateText:LiveData<String>
-    get() = _dateText
+    val dateText: LiveData<String>
+        get() = _dateText
 
     private val _timeText = MutableLiveData<String>()
-    val timeText:LiveData<String>
+    val timeText: LiveData<String>
         get() = _timeText
 
     private val _repeatIntervalText = MutableLiveData<String>()
-    val repeatIntervalText:LiveData<String>
+    val repeatIntervalText: LiveData<String>
         get() = _repeatIntervalText
 
     private val _repeatIntervalUnitText = MutableLiveData<String>()
-    val repeatIntervalUnitText:LiveData<String>
+    val repeatIntervalUnitText: LiveData<String>
         get() = _repeatIntervalUnitText
 
     private val _navigationEvent = MutableLiveData<Event<Destination>>()
@@ -60,26 +67,26 @@ class ReminderEditViewModel(
         get() = _showDeleteDialogEvent
 
     private val _showDatePickerEvent = MutableLiveData<Event<String>>()
-    val showDatePickerEvent:LiveData<Event<String>>
-    get() = _showDatePickerEvent
+    val showDatePickerEvent: LiveData<Event<String>>
+        get() = _showDatePickerEvent
 
     private val _showTimePickerEvent = MutableLiveData<Event<String>>()
-    val showTimePickerEvent:LiveData<Event<String>>
+    val showTimePickerEvent: LiveData<Event<String>>
         get() = _showTimePickerEvent
 
     private val _showEditDialogEvent = MutableLiveData<Event<String>>()
-    val showEditDialogEvent:LiveData<Event<String>>
+    val showEditDialogEvent: LiveData<Event<String>>
         get() = _showEditDialogEvent
 
     private val _showListDialogEvent = MutableLiveData<Event<Unit>>()
-    val showListDialogEvent:LiveData<Event<Unit>>
+    val showListDialogEvent: LiveData<Event<Unit>>
         get() = _showListDialogEvent
 
 
     fun initializeReminder() {
         viewModelScope.launch {
             if (reminderIdentifier != null) {
-                editableReminder= repository.getReminderById(reminderIdentifier) ?: Reminders()
+                editableReminder = repository.getReminderById(reminderIdentifier) ?: Reminders()
             } else {
                 editableReminder = Reminders()
             }
@@ -100,24 +107,26 @@ class ReminderEditViewModel(
     fun navigateUp() {
         _navigationEvent.value = Event(Destination.UP)
     }
+
     fun showDeleteDialog() {
         _showDeleteDialogEvent.value = Event(app.getString(R.string.delete_reminder_message))
     }
 
-    fun saveReminder(){
-        if(_titleEditText.value.isNullOrEmpty()){
+    fun saveReminder() {
+        if (_titleEditText.value.isNullOrEmpty()) {
             _snackBarEvent.value = Event(app.getString(R.string.snackbartext_emptyReminder))
-        }else{
+        } else {
             updateReminder()
             viewModelScope.launch {
                 if (reminderIdentifier == null) {
                     repository.insert(editableReminder)
                 } else {
                     repository.update(editableReminder)
+                    cancelExistingAlarm()
                 }
+                createReminderAlarm()
+                _navigationEvent.value = Event(Destination.UP)
             }
-            _navigationEvent.value = Event(Destination.UP)
-
         }
     }
 
@@ -131,43 +140,67 @@ class ReminderEditViewModel(
             repeatUnit = _repeatIntervalUnitText.value!!
         }
     }
-    fun deleteNote() {
+
+    fun deleteAndNavigateToList() {
         viewModelScope.launch {
             repository.delete(editableReminder)
+            cancelExistingAlarm()
+            _navigationEvent.value = Event(Destination.UP)
         }
     }
-    fun deleteAndNavigateToList() {
-        deleteNote()
-        _navigationEvent.value = Event(Destination.UP)
-    }
 
-    fun showDatePicker(){
+    fun showDatePicker() {
         _showDatePickerEvent.value = Event(_dateText.value!!)
     }
 
-    fun showTimePicker(){
+    fun showTimePicker() {
         _showTimePickerEvent.value = Event(_timeText.value!!)
     }
 
-    fun showEditDialog(){
+    fun showEditDialog() {
         _showEditDialogEvent.value = Event(_repeatIntervalText.value!!)
     }
 
-    fun showListDialog(){
+    fun showListDialog() {
         _showListDialogEvent.value = Event(Unit)
     }
 
     fun updateDateTextView(date: String) {
         _dateText.value = date
     }
-    fun updateTimeTextView(time:String){
+
+    fun updateTimeTextView(time: String) {
         _timeText.value = time
     }
 
-    fun updateReminderUnit(item:String){
+    fun updateReminderUnit(item: String) {
         _repeatIntervalUnitText.value = item
     }
-    fun updateReminderValue(valueInput:String){
+
+    fun updateReminderValue(valueInput: String) {
         _repeatIntervalText.value = valueInput
     }
+
+    fun createReminderAlarm() {
+        if (editableReminder.isActive) {
+            AlarmUtil.createAlarm(
+                app.applicationContext,
+                editableReminder,
+                alarmManager
+            )
+        }
+    }
+
+    fun cancelExistingAlarm() {
+        AlarmUtil.cancelAlarm(
+            app.applicationContext,
+            editableReminder,
+            alarmManager)
+    }
+
+
+
+
+
+
 }

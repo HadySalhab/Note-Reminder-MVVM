@@ -12,7 +12,7 @@ import java.util.*
 data class Reminders(
     @ColumnInfo(name = "_id")
     @PrimaryKey(autoGenerate = true)
-    val id:Long =0L,
+    val id:Int =0,
     @ColumnInfo(name="reminder_identifier")
     val reminderIndentifier:String = UUID.randomUUID().toString(),
     var title: String = "",
