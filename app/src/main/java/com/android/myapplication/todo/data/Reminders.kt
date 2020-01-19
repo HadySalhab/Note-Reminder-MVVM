@@ -21,9 +21,9 @@ data class Reminders(
     var time: String = SimpleDateFormat("h:mm a").format(Date()),
     var repeat:Boolean = false,
     @ColumnInfo(name = "repeat_value")
-    var repeatValue:Int = 0,
+    var repeatValue:Int = 1,
     @ColumnInfo(name = "repeat_unit")
-    var repeatUnit:String="",
+    var repeatUnit:String="Day",
     @ColumnInfo(name = "active")
     var isActive:Boolean = false
 

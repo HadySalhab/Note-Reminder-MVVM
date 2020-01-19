@@ -36,6 +36,9 @@
     <string name="permission_dialog_message">Without this permission the app is unable to take picture for your note.Are you sure you want to deny this permission?</string>
     <string name="permission_dialog_positive">I\'M SURE</string>
     <string name="permission_dialog_negative">RE-TRY</string>
+    <string name="repeat_value_dialog_message">Set Repeat Value:</string>
+    <string name="value_dialog_positive_btn">Ok</string>
+    <string name="value_dialog_negative_btn">Cancel</string>
 
 
     <string-array name="filter_spinner">

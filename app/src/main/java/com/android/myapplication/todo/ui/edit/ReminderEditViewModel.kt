@@ -55,9 +55,25 @@ class ReminderEditViewModel(
     val snackBarEvent: LiveData<Event<String>>
         get() = _snackBarEvent
 
-    private val _showDeletDialogEvent = MutableLiveData<Event<String>>()
+    private val _showDeleteDialogEvent = MutableLiveData<Event<String>>()
     val showDeleteDialogEvent: LiveData<Event<String>>
-        get() = _showDeletDialogEvent
+        get() = _showDeleteDialogEvent
+
+    private val _showDatePickerEvent = MutableLiveData<Event<String>>()
+    val showDatePickerEvent:LiveData<Event<String>>
+    get() = _showDatePickerEvent
+
+    private val _showTimePickerEvent = MutableLiveData<Event<String>>()
+    val showTimePickerEvent:LiveData<Event<String>>
+        get() = _showTimePickerEvent
+
+    private val _showEditDialogEvent = MutableLiveData<Event<String>>()
+    val showEditDialogEvent:LiveData<Event<String>>
+        get() = _showEditDialogEvent
+
+    private val _showListDialogEvent = MutableLiveData<Event<Unit>>()
+    val showListDialogEvent:LiveData<Event<Unit>>
+        get() = _showListDialogEvent
 
 
     fun initializeReminder() {
@@ -85,14 +101,14 @@ class ReminderEditViewModel(
         _navigationEvent.value = Event(Destination.UP)
     }
     fun showDeleteDialog() {
-        _showDeletDialogEvent.value = Event(app.getString(R.string.delete_reminder_message))
+        _showDeleteDialogEvent.value = Event(app.getString(R.string.delete_reminder_message))
     }
 
     fun saveReminder(){
         if(_titleEditText.value.isNullOrEmpty()){
             _snackBarEvent.value = Event(app.getString(R.string.snackbartext_emptyReminder))
         }else{
-            updateNote()
+            updateReminder()
             viewModelScope.launch {
                 if (reminderIdentifier == null) {
                     repository.insert(editableReminder)
@@ -105,7 +121,7 @@ class ReminderEditViewModel(
         }
     }
 
-    fun updateNote() {
+    fun updateReminder() {
         editableReminder.apply {
             title = _titleEditText.value!!
             date = _dateText.value!!
@@ -124,4 +140,24 @@ class ReminderEditViewModel(
         deleteNote()
         _navigationEvent.value = Event(Destination.UP)
     }
+
+    fun showDatePicker(){
+        _showDatePickerEvent.value = Event(_dateText.value!!)
+    }
+
+    fun showTimePicker(){
+        _showTimePickerEvent.value = Event(_timeText.value!!)
+    }
+
+    fun showEditDialog(){
+        _showEditDialogEvent.value = Event(_repeatIntervalText.value!!)
+    }
+
+    fun showListDialog(){
+        _showListDialogEvent.value = Event(Unit)
+    }
+
+
+
+
 }

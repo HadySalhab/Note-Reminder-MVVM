@@ -91,6 +91,8 @@
                     android:orientation="vertical">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:onClick="@{()->viewModel.showDatePicker()}"
+                        android:background="?attr/selectableItemBackground"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -134,6 +136,8 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:onClick="@{()->viewModel.showTimePicker()}"
+                        android:background="?attr/selectableItemBackground"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -155,9 +159,9 @@
                             android:layout_marginEnd="@dimen/medium_margin"
                             android:drawableEnd="@drawable/ic_arrow_right"
                             android:gravity="center"
-                            android:text="@{viewModel.timeText}"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                             android:textStyle="normal"
+                            android:text="@{viewModel.timeText}"
                             app:layout_constraintBottom_toBottomOf="@+id/reminder_text"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/reminder_text"
@@ -197,9 +201,9 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginEnd="@dimen/medium_margin"
-                            android:checked="@={viewModel._switchRepeat}"
                             android:textOff="Off"
                             android:textOn="On"
+                            android:checked="@={viewModel._switchRepeat}"
                             app:layout_constraintBottom_toBottomOf="@+id/reminder_repeat"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/reminder_repeat" />
@@ -218,6 +222,8 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:background="?attr/selectableItemBackground"
+                        android:onClick="@{()->viewModel.showEditDialog()}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -261,6 +267,8 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:background="?attr/selectableItemBackground"
+                        android:onClick="@{()->viewModel.showListDialog()}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -282,12 +290,13 @@
                             android:layout_marginEnd="@dimen/medium_margin"
                             android:drawableEnd="@drawable/ic_arrow_right"
                             android:gravity="center"
+                            android:text="@{viewModel.repeatIntervalUnitText}"
                             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                             android:textStyle="normal"
-                            android:text="@{viewModel.repeatIntervalUnitText}"
                             app:layout_constraintBottom_toBottomOf="@+id/reminder_repeat_unit"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/reminder_repeat_unit"
+                            app:layout_constraintVertical_bias="1.0"
                             tools:text="25/2/52" />
 
                         <View

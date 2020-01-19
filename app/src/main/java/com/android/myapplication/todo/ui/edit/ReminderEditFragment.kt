@@ -7,6 +7,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -14,11 +15,8 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.android.myapplication.todo.R
 import com.android.myapplication.todo.databinding.FragmentEditReminderBinding
-import com.android.myapplication.todo.ui.dialogs.DeleteDialogFragment
-import com.android.myapplication.todo.util.DIALOG_DELETE
-import com.android.myapplication.todo.util.Destination
-import com.android.myapplication.todo.util.EventObserver
-import com.android.myapplication.todo.util.REQUEST_DELETE_ANSWER
+import com.android.myapplication.todo.ui.dialogs.*
+import com.android.myapplication.todo.util.*
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -26,7 +24,7 @@ import org.koin.core.parameter.parametersOf
 /**
  * A simple [Fragment] subclass.
  */
-class ReminderEditFragment : Fragment(),DeleteDialogFragment.Callbacks {
+class ReminderEditFragment : Fragment(), DeleteDialogFragment.Callbacks {
     private val args by navArgs<ReminderEditFragmentArgs>()
     private lateinit var binding: FragmentEditReminderBinding
     private lateinit var navController: NavController
@@ -40,13 +38,14 @@ class ReminderEditFragment : Fragment(),DeleteDialogFragment.Callbacks {
         savedInstanceState: Bundle?
     ): View? {
         navController = findNavController()
-        binding = FragmentEditReminderBinding.inflate(layoutInflater,container,false)
+        binding = FragmentEditReminderBinding.inflate(layoutInflater, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         setuptoolbar()
         setHasOptionsMenu(true)
         return binding.root
     }
+
     fun setuptoolbar() {
         (requireActivity() as AppCompatActivity).apply {
             setSupportActionBar(binding.reminderToolbar)
@@ -56,8 +55,8 @@ class ReminderEditFragment : Fragment(),DeleteDialogFragment.Callbacks {
                 setDisplayShowTitleEnabled(false)
                 setHomeAsUpIndicator(R.drawable.ic_close)
             }
-            }
         }
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -74,58 +73,90 @@ class ReminderEditFragment : Fragment(),DeleteDialogFragment.Callbacks {
             }
         })
 
-        viewModel.showDeleteDialogEvent.observe(viewLifecycleOwner, EventObserver {message->
+        viewModel.showDeleteDialogEvent.observe(viewLifecycleOwner, EventObserver { message ->
             DeleteDialogFragment.newInstance(message).apply {
                 setTargetFragment(this@ReminderEditFragment, REQUEST_DELETE_ANSWER)
                 show(this@ReminderEditFragment.requireFragmentManager(), DIALOG_DELETE)
             }
         })
+        viewModel.showDatePickerEvent.observe(viewLifecycleOwner, EventObserver { date ->
+            DatePickerFragment.newInstance(date).apply {
+                setTargetFragment(this@ReminderEditFragment, REQUEST_DATE)
+                show(this@ReminderEditFragment.requireFragmentManager(), DIALOG_DATE)
+            }
+        })
+
+        viewModel.showTimePickerEvent.observe(viewLifecycleOwner, EventObserver { time ->
+            TimePickerFragment.newInstance(time).apply {
+                setTargetFragment(this@ReminderEditFragment, REQUEST_TIME)
+                show(this@ReminderEditFragment.requireFragmentManager(), DIALOG_TIME)
+            }
+        })
+
+        viewModel.showEditDialogEvent.observe(viewLifecycleOwner, EventObserver { value ->
+            ReminderValueDialog.newInstance(value).apply {
+                setTargetFragment(this@ReminderEditFragment, REQUEST_REPEAT_VALUE)
+                show(this@ReminderEditFragment.requireFragmentManager(), DIALOG_REAPEAT_VALUE)
+            }
+        })
+
+        viewModel.showListDialogEvent.observe(viewLifecycleOwner,EventObserver{
+            ReminderUnitDialog().apply {
+                setTargetFragment(this@ReminderEditFragment, REQUEST_REPEAT_UNIT)
+                show(this@ReminderEditFragment.requireFragmentManager(),DIALOG_REAPEAT_UNIT)
+            }
+        })
+
+
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.edit_reminder_optionmenu,menu)
-        menu.findItem(R.id.edit_reminder_delete).isVisible = args.reminderId != null
-    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
 
-            R.id.edit_reminder_delete -> {
-                viewModel.showDeleteDialog()
-                true
+        override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+            super.onCreateOptionsMenu(menu, inflater)
+            inflater.inflate(R.menu.edit_reminder_optionmenu, menu)
+            menu.findItem(R.id.edit_reminder_delete).isVisible = args.reminderId != null
+        }
+
+        override fun onOptionsItemSelected(item: MenuItem): Boolean {
+            return when (item.itemId) {
+
+                R.id.edit_reminder_delete -> {
+                    viewModel.showDeleteDialog()
+                    true
+                }
+
+                R.id.edit_reminder_check -> {
+                    viewModel.saveReminder()
+                    true
+                }
+
+                android.R.id.home -> {
+                    viewModel.navigateUp()
+                    true
+                }
+
+                else -> {
+                    super.onOptionsItemSelected(item)
+                }
             }
 
-            R.id.edit_reminder_check -> {
-                viewModel.saveReminder()
-                true
-            }
+        }
 
-            android.R.id.home -> {
-                viewModel.navigateUp()
-                true
-            }
+        override fun onPositiveButtonClick() {
+            viewModel.deleteAndNavigateToList()
+        }
 
-            else->{
-                super.onOptionsItemSelected(item)
-            }
+        fun showSnackBar(message: String, actionMessage: String?) {
+            val snackbar = Snackbar.make(
+                binding.reminderEditCoordinatorLayout,
+                message,
+                Snackbar.LENGTH_LONG
+            )
+            snackbar.show()
         }
 
     }
-
-    override fun onPositiveButtonClick() {
-        viewModel.deleteAndNavigateToList()
-    }
-    fun showSnackBar(message: String, actionMessage: String?) {
-        val snackbar = Snackbar.make(
-            binding.reminderEditCoordinatorLayout,
-            message,
-            Snackbar.LENGTH_LONG
-        )
-        snackbar.show()
-    }
-
-}
 
 
 
