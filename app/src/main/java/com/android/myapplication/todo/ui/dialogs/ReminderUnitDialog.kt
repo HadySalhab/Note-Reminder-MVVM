@@ -15,7 +15,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class ReminderUnitDialog : DialogFragment() {
     interface Callbacks {
-        fun onItemSelected(item:Int)
+        fun onItemSelected(item:String)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -23,7 +23,15 @@ class ReminderUnitDialog : DialogFragment() {
         val items = arrayOf<String>("Month","Week","Day","Hour","Minute")
             val clickListener = DialogInterface.OnClickListener{ dialog, item->
                 targetFragment?.let { fragment ->
-                    (fragment as ReminderUnitDialog.Callbacks).onItemSelected(item)
+                    val stringItem=when(item){
+                        0->items.get(0)
+                        1->items.get(1)
+                        2->items.get(2)
+                        3->items.get(3)
+                        4->items.get(4)
+                        else->items.get(0)
+                    }
+                    (fragment as ReminderUnitDialog.Callbacks).onItemSelected(stringItem)
                 }
             }
             val alertDialogBuilder = MaterialAlertDialogBuilder(requireContext())

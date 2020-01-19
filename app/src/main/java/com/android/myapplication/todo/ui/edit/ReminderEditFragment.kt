@@ -4,10 +4,8 @@ package com.android.myapplication.todo.ui.edit
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.*
-import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
-import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -24,7 +22,13 @@ import org.koin.core.parameter.parametersOf
 /**
  * A simple [Fragment] subclass.
  */
-class ReminderEditFragment : Fragment(), DeleteDialogFragment.Callbacks {
+class ReminderEditFragment : Fragment(),
+    DeleteDialogFragment.Callbacks,
+    DatePickerFragment.Callbacks,
+    TimePickerFragment.Callbacks,
+    ReminderUnitDialog.Callbacks,
+    ReminderValueDialog.Callbacks {
+
     private val args by navArgs<ReminderEditFragmentArgs>()
     private lateinit var binding: FragmentEditReminderBinding
     private lateinit var navController: NavController
@@ -100,10 +104,10 @@ class ReminderEditFragment : Fragment(), DeleteDialogFragment.Callbacks {
             }
         })
 
-        viewModel.showListDialogEvent.observe(viewLifecycleOwner,EventObserver{
+        viewModel.showListDialogEvent.observe(viewLifecycleOwner, EventObserver {
             ReminderUnitDialog().apply {
                 setTargetFragment(this@ReminderEditFragment, REQUEST_REPEAT_UNIT)
-                show(this@ReminderEditFragment.requireFragmentManager(),DIALOG_REAPEAT_UNIT)
+                show(this@ReminderEditFragment.requireFragmentManager(), DIALOG_REAPEAT_UNIT)
             }
         })
 
@@ -111,52 +115,67 @@ class ReminderEditFragment : Fragment(), DeleteDialogFragment.Callbacks {
     }
 
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.edit_reminder_optionmenu, menu)
+        menu.findItem(R.id.edit_reminder_delete).isVisible = args.reminderId != null
+    }
 
-        override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-            super.onCreateOptionsMenu(menu, inflater)
-            inflater.inflate(R.menu.edit_reminder_optionmenu, menu)
-            menu.findItem(R.id.edit_reminder_delete).isVisible = args.reminderId != null
-        }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
 
-        override fun onOptionsItemSelected(item: MenuItem): Boolean {
-            return when (item.itemId) {
-
-                R.id.edit_reminder_delete -> {
-                    viewModel.showDeleteDialog()
-                    true
-                }
-
-                R.id.edit_reminder_check -> {
-                    viewModel.saveReminder()
-                    true
-                }
-
-                android.R.id.home -> {
-                    viewModel.navigateUp()
-                    true
-                }
-
-                else -> {
-                    super.onOptionsItemSelected(item)
-                }
+            R.id.edit_reminder_delete -> {
+                viewModel.showDeleteDialog()
+                true
             }
 
-        }
+            R.id.edit_reminder_check -> {
+                viewModel.saveReminder()
+                true
+            }
 
-        override fun onPositiveButtonClick() {
-            viewModel.deleteAndNavigateToList()
-        }
+            android.R.id.home -> {
+                viewModel.navigateUp()
+                true
+            }
 
-        fun showSnackBar(message: String, actionMessage: String?) {
-            val snackbar = Snackbar.make(
-                binding.reminderEditCoordinatorLayout,
-                message,
-                Snackbar.LENGTH_LONG
-            )
-            snackbar.show()
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
         }
 
     }
+
+    override fun onPositiveButtonClick() {
+        viewModel.deleteAndNavigateToList()
+    }
+
+    fun showSnackBar(message: String, actionMessage: String?) {
+        val snackbar = Snackbar.make(
+            binding.reminderEditCoordinatorLayout,
+            message,
+            Snackbar.LENGTH_LONG
+        )
+        snackbar.show()
+    }
+
+    override fun onDateSelected(date: String) {
+        viewModel.updateDateTextView(date)
+    }
+
+    override fun onTimeSelected(time: String) {
+        viewModel.updateTimeTextView(time)
+    }
+
+    override fun onItemSelected(item: String) {
+        viewModel.updateReminderUnit(item)
+    }
+
+    override fun onValueSelected(valueInput: String) {
+        viewModel.updateReminderValue(valueInput)
+    }
+
+}
 
 
 

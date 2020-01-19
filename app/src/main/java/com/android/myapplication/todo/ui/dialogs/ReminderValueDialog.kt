@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.text.InputType
+import android.text.TextUtils
 import android.widget.EditText
 import androidx.core.view.marginStart
 import androidx.fragment.app.DialogFragment
@@ -15,7 +16,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class ReminderValueDialog private constructor(): DialogFragment() {
     interface Callbacks {
-        fun onPositiveButtonClick()
+        fun onValueSelected(valueInput:String)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -28,7 +29,13 @@ class ReminderValueDialog private constructor(): DialogFragment() {
         }
             val clickListener = DialogInterface.OnClickListener { dialog, id ->
                 targetFragment?.let { fragment ->
-                    (fragment as ReminderValueDialog.Callbacks).onPositiveButtonClick()
+                    var valueInput = editText.text.toString()
+                    if(TextUtils.isEmpty(valueInput)){
+                        valueInput = "1"
+                    }else{
+                        valueInput = valueInput.trim()
+                    }
+                    (fragment as ReminderValueDialog.Callbacks).onValueSelected(valueInput)
                 }
             }
             val alertDialogBuilder = MaterialAlertDialogBuilder(requireContext())

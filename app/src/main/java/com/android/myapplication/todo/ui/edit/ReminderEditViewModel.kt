@@ -157,7 +157,17 @@ class ReminderEditViewModel(
         _showListDialogEvent.value = Event(Unit)
     }
 
+    fun updateDateTextView(date: String) {
+        _dateText.value = date
+    }
+    fun updateTimeTextView(time:String){
+        _timeText.value = time
+    }
 
-
-
+    fun updateReminderUnit(item:String){
+        _repeatIntervalUnitText.value = item
+    }
+    fun updateReminderValue(valueInput:String){
+        _repeatIntervalText.value = valueInput
+    }
 }
