@@ -40,6 +40,12 @@
     <string name="value_dialog_positive_btn">Ok</string>
     <string name="value_dialog_negative_btn">Cancel</string>
 
+    <string name="reminder_notification_channel_id" translatable="false">reminder_channel</string>
+    <string name="reminder_notification_channel_name" translatable="true">Reminder</string>
+    <string name="reminder_notification_channel_description">User reminder</string>
+
+
+
 
     <string-array name="filter_spinner">
         <item>@string/category_all</item>
