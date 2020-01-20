@@ -1,5 +1,5 @@
 <h1>Daily Note</h1>
-Daily Note is an application that allows the user to create notes with images in a simple but aesthetically pleasing interface.
+Daily Note is an application that allows the user to create notes with images and reminders in a simple but aesthetically pleasing interface.
 The application follows the most recent design guidelines of the Google operating system.
 <br></br>
 The purpose of creating this application was to show how to implement latest features and functions recommended by Google (Jetpack Libraries) using kotlin.
@@ -14,7 +14,9 @@ The purpose of creating this application was to show how to implement latest fea
 <li>Filtering notes based on favorite flag</li>
 <li>Image attachement</li>
 <li>Note list</li>
+<li>Reminderlist</li>
 <li>Date selection</li>
+<li>Time selection</li>
 </ul>
 
 <h3><b>Android development concepts used: </b></h3>
