@@ -7,15 +7,19 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.provider.CalendarContract
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.android.myapplication.todo.MainActivity
 import com.android.myapplication.todo.R
+import com.android.myapplication.todo.data.Reminders
 import com.android.myapplication.todo.util.INTENT_EXTRA_REMINDER_IDENTIFIER
 import com.android.myapplication.todo.util.INTENT_EXTRA_ROW_ID
 import com.android.myapplication.todo.util.INTENT_EXTRA_TITLE
 
 class AlarmReceiver:BroadcastReceiver(){
+
     override fun onReceive(context: Context?, intent: Intent?) {
         //notification Extras..
         val notificationId = intent?.extras?.getInt(INTENT_EXTRA_ROW_ID)?:0
@@ -41,26 +45,30 @@ class AlarmReceiver:BroadcastReceiver(){
     }
 
     companion object {
+
+        private const val TAG = "AlarmReceiver"
+
         fun getAlarmPendingIntent(
             pckgContext: Context,
-            notificationId: Int,
-            reminderId: String,
-            reminderTitle: String
+            reminder:Reminders
         ): PendingIntent {
             val intent = Intent(pckgContext, AlarmReceiver::class.java)
             intent.apply {
-                putExtra(INTENT_EXTRA_REMINDER_IDENTIFIER, reminderId)
-                putExtra(INTENT_EXTRA_ROW_ID, notificationId)
-                putExtra(INTENT_EXTRA_TITLE, reminderTitle)
+                putExtra(INTENT_EXTRA_REMINDER_IDENTIFIER, reminder.reminderIndentifier)
+                putExtra(INTENT_EXTRA_ROW_ID, reminder.id)
+                putExtra(INTENT_EXTRA_TITLE, reminder.title)
             }
             val pendingIntent = PendingIntent.getBroadcast(
                 pckgContext,
-                notificationId,
+                reminder.id,
                 intent,
                 PendingIntent.FLAG_CANCEL_CURRENT
             )
+            Log.d(TAG, "getAlarmPendingIntent: ${reminder.id}")
             return pendingIntent
         }
+
+
     }
 
 }
