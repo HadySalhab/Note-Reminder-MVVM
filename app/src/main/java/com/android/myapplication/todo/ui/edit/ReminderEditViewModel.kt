@@ -120,6 +120,7 @@ class ReminderEditViewModel(
             viewModelScope.launch {
                 if (reminderIdentifier == null) {
                     repository.insert(editableReminder)
+                    editableReminder = repository.getLatestReminder()!!
                 } else {
                     repository.update(editableReminder)
                     cancelExistingAlarm()
