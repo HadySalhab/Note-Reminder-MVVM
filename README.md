@@ -53,8 +53,9 @@ The purpose of creating this application was to show how to implement latest fea
 
 <h3>Screenshots: </h3>
 
+<div>
 ![image](https://user-images.githubusercontent.com/51857962/72696073-08124a80-3b8f-11ea-862a-75dd12c376fb.png)![image](https://user-images.githubusercontent.com/51857962/72696114-27a97300-3b8f-11ea-9e02-ec2e3259c14b.png)![image](https://user-images.githubusercontent.com/51857962/72696142-43147e00-3b8f-11ea-81a4-10fd574c4fc4.png)![image](https://user-images.githubusercontent.com/51857962/72696165-59223e80-3b8f-11ea-924c-c73ee51a62f3.png)![image](https://user-images.githubusercontent.com/51857962/72696272-ad2d2300-3b8f-11ea-9e1e-20f1da37b106.png)![image](https://user-images.githubusercontent.com/51857962/72696336-dea5ee80-3b8f-11ea-81b7-7054974ddc79.png)![image](https://user-images.githubusercontent.com/51857962/72696352-f2515500-3b8f-11ea-8d27-49aef404df90.png)![image](https://user-images.githubusercontent.com/51857962/72696377-05642500-3b90-11ea-928f-f640d131025c.png)![image](https://user-images.githubusercontent.com/51857962/72696408-22005d00-3b90-11ea-98e3-bafab8b0103e.png)
-
+</div>
 
 
 
