@@ -32,6 +32,7 @@ The purpose of creating this application was to show how to implement latest fea
 <li>Shared Preferences</li>
 <li>Glide & Picasso</li>
 <li>Implicit intent</li>
+ <li>AlarmManager</li>
 <li>Fragment-to-Fragment communication (Callbacks) + Arguments</li>
 <li>ViewPager</li>
 <li>RecyclerView with DiffUtil</li>
