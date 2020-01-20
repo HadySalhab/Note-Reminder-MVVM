@@ -54,21 +54,13 @@ The purpose of creating this application was to show how to implement latest fea
 <h3>Screenshots: </h3>
 
 
-![image](https://user-images.githubusercontent.com/51857962/72215789-257e5d80-356c-11ea-825b-2a2967dbcdbd.png) ![image](https://user-images.githubusercontent.com/51857962/72215796-46df4980-356c-11ea-844b-99fde86eb951.png) 
-![image](https://user-images.githubusercontent.com/51857962/72215813-6ecead00-356c-11ea-8407-46ca09cf636d.png) ![image](https://user-images.githubusercontent.com/51857962/72215827-a9384a00-356c-11ea-844a-b032e961d6ed.png) ![image](https://user-images.githubusercontent.com/51857962/72215840-dab11580-356c-11ea-9d53-7f9d8247b8dd.png) ![image](https://user-images.githubusercontent.com/51857962/72215908-c91c3d80-356d-11ea-93f4-64b647c58320.png)
- ![image](https://user-images.githubusercontent.com/51857962/72215884-85293880-356d-11ea-8e3c-3577294a38d3.png) ![image](https://user-images.githubusercontent.com/51857962/72215878-73e02c00-356d-11ea-98d3-258b04b0ff09.png)
+ 
+![image](https://user-images.githubusercontent.com/51857962/72696073-08124a80-3b8f-11ea-862a-75dd12c376fb.png)![image](https://user-images.githubusercontent.com/51857962/72696114-27a97300-3b8f-11ea-9e02-ec2e3259c14b.png)![image](https://user-images.githubusercontent.com/51857962/72696142-43147e00-3b8f-11ea-81a4-10fd574c4fc4.png)![image](https://user-images.githubusercontent.com/51857962/72696165-59223e80-3b8f-11ea-924c-c73ee51a62f3.png)![image](https://user-images.githubusercontent.com/51857962/72696272-ad2d2300-3b8f-11ea-9e1e-20f1da37b106.png)![image](https://user-images.githubusercontent.com/51857962/72696336-dea5ee80-3b8f-11ea-81b7-7054974ddc79.png)![image](https://user-images.githubusercontent.com/51857962/72696352-f2515500-3b8f-11ea-8d27-49aef404df90.png)![image](https://user-images.githubusercontent.com/51857962/72696377-05642500-3b90-11ea-928f-f640d131025c.png)![image](https://user-images.githubusercontent.com/51857962/72696408-22005d00-3b90-11ea-98e3-bafab8b0103e.png)
 
 
 
 
 
-<h3><b>Further Development:</b></h3>
-<ul>
-<li>Reminder list</li>
-<li>Sharing notes</li>
-<li>Localization</li>
-<li>Accessibility</li>
-</ul>
 
 <h3>Resources: </h3>
 <ul>
