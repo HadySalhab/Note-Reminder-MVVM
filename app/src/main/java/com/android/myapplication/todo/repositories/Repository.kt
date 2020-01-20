@@ -64,7 +64,13 @@ class Repository(
         }
     }
 
-    suspend fun insert(reminder: Reminders) {
+    suspend fun getLatestReminder():Reminders?{
+        return  withContext(Dispatchers.IO){
+            reminderDao.getLatestReminder()
+        }
+    }
+
+    suspend fun insert(reminder: Reminders){
         withContext(Dispatchers.IO) {
             reminderDao.insertReminder(reminder)
         }
