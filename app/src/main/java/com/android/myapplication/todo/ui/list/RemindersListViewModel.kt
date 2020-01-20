@@ -30,26 +30,25 @@ class RemindersListViewModel(
 
     fun updateReminder(reminder: Reminders) {
         viewModelScope.launch {
-            Log.d(TAG, "createReminderAlarm: ")
             repository.update(reminder)
         }
     }
 
-    fun registerNewAlarm(reminder: Reminders) {
-        viewModelScope.launch {
-
-        }
+    fun updateAlarm(reminder: Reminders) {
+            if(reminder.isActive){
+                createReminderAlarm(reminder)
+            }else{
+                cancelExistingAlarm(reminder)
+            }
     }
 
   private  fun createReminderAlarm(reminder: Reminders) {
-      if(reminder.isActive) {
-          Log.d(TAG, "createReminderAlarm: ")
           AlarmUtil.createAlarm(
               app.applicationContext,
               reminder,
               alarmManager
           )
-      }
+      Log.d(TAG, "createReminderAlarm: ${reminder.id}")
     }
 
   private  fun cancelExistingAlarm(reminder: Reminders) {
@@ -58,6 +57,7 @@ class RemindersListViewModel(
             reminder,
             alarmManager
         )
+      Log.d(TAG, "cancelExistingAlarm: ${reminder.id}")
     }
 
 }

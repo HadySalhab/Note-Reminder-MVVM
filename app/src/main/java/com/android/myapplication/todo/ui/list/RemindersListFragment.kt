@@ -30,6 +30,7 @@ class RemindersListFragment : Fragment() {
     private val onCheckChangedListener: (Reminders) -> Unit = { reminder ->
         val newReminder = reminder.copy(isActive = !reminder.isActive)
         viewModel.updateReminder(newReminder)
+        viewModel.updateAlarm(newReminder)
     }
 
     private val onReminderClickListener: (Reminders) -> Unit = { reminder ->
