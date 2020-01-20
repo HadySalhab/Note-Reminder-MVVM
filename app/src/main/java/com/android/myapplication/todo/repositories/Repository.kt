@@ -58,6 +58,12 @@ class Repository(
 
     fun getAllReminders() = reminderDao.getReminders()
 
+    suspend fun getRemindersList():List<Reminders>?{
+        return withContext(Dispatchers.IO){
+            reminderDao.getRemindersList()
+        }
+    }
+
     suspend fun getReminderById(reminderId: String): Reminders? {
         return withContext(Dispatchers.IO) {
             reminderDao.getReminderById(reminderId)

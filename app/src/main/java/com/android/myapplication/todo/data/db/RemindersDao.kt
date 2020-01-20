@@ -13,6 +13,9 @@ interface RemindersDao{
     @Query("SELECT * FROM reminders ORDER BY _id DESC")
     fun getReminders():LiveData<List<Reminders>>
 
+    @Query("SELECT * FROM reminders ORDER BY _id DESC")
+    fun getRemindersList():List<Reminders>?
+
     @Query("SELECT * FROM reminders WHERE reminder_identifier = :reminderId")
     suspend fun getReminderById(reminderId:String):Reminders?
 

@@ -2,12 +2,15 @@ package com.android.myapplication.todo.util
 
 import android.app.AlarmManager
 import android.app.PendingIntent
+import android.content.ComponentName
 import android.content.Context
+import android.content.pm.PackageManager
 import android.os.SystemClock
 import android.util.Log
 import androidx.core.app.AlarmManagerCompat
 import com.android.myapplication.todo.data.Reminders
 import com.android.myapplication.todo.receiver.AlarmReceiver
+import com.android.myapplication.todo.receiver.BootReceiver
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -73,6 +76,7 @@ class AlarmUtil {
                     alarmPendingIntent
                 )
             }
+            updateAlarmWhenReboot(context,PackageManager.COMPONENT_ENABLED_STATE_ENABLED)
         }
 
         fun cancelAlarm(
@@ -85,8 +89,18 @@ class AlarmUtil {
                 reminder
             )
             Log.d(TAG, "cancelAlarm: ")
-
             alarmManager.cancel(alarmPendingIntent)
+            updateAlarmWhenReboot(context,PackageManager.COMPONENT_ENABLED_STATE_DISABLED)
+        }
+
+
+        private fun updateAlarmWhenReboot(context:Context,state:Int){
+            val receiver = ComponentName(context,BootReceiver::class.java)
+            context.packageManager.setComponentEnabledSetting(
+                receiver,
+                state,
+                PackageManager.DONT_KILL_APP
+            )
         }
     }
 }
