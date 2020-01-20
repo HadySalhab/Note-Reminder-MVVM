@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="reminder"
             type="com.android.myapplication.todo.data.Reminders" />
@@ -75,6 +76,7 @@
             app:layout_constraintStart_toEndOf="@id/reminder_isactive"
             app:layout_constraintTop_toBottomOf="@+id/item_reminder_time_date"
             android:text="@{@string/reminder_repeat_text(reminder.repeatValue,reminder.repeatUnit)}"
+            android:visibility="@{reminder.repeat? View.VISIBLE : View.GONE}"
             tools:text="Reminder 1" />
 
         <androidx.constraintlayout.widget.Guideline
