@@ -28,4 +28,7 @@ interface RemindersDao{
     @Query("DELETE FROM reminders")
     suspend fun clearAllreminders()
 
+    @Query("SELECT * FROM reminders ORDER BY _id DESC LIMIT 1")
+    suspend fun getLatestReminder():Reminders?
+
 }
