@@ -55,9 +55,7 @@ class AlarmUtil {
         ) {
             val alarmPendingIntent = AlarmReceiver.getAlarmPendingIntent(
                 context,
-                reminder.id,
-                reminder.reminderIndentifier,
-                reminder.title
+                reminder
             )
 
             if (reminder.repeat) {
@@ -84,9 +82,7 @@ class AlarmUtil {
         ) {
             val alarmPendingIntent = AlarmReceiver.getAlarmPendingIntent(
                 context,
-                reminder.id,
-                reminder.reminderIndentifier,
-                reminder.title
+                reminder
             )
             Log.d(TAG, "cancelAlarm: ")
 
