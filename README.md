@@ -62,14 +62,6 @@ The purpose of creating this application was to show how to implement latest fea
 
 
 
-<h3><b>Further Development:</b></h3>
-<ul>
-<li>Reminder list</li>
-<li>Sharing notes</li>
-<li>Localization</li>
-<li>Accessibility</li>
-</ul>
-
 <h3>Resources: </h3>
 <ul>
 <li>https://developer.android.com</li>
