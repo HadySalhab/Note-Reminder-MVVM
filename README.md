@@ -1,76 +1,57 @@
-<h1>Daily Note</h1>
+# Daily Note
+
+## Project Overview
+
 Daily Note is an application that allows the user to create notes with images and reminders in a simple but aesthetically pleasing interface.
 The application follows the most recent design guidelines of the Google operating system.
-<br></br>
+
 The purpose of creating this application was to show how to implement latest features and functions recommended by Google (Jetpack Libraries) using kotlin.
 
-![jetpack logo](https://user-images.githubusercontent.com/51857962/72215611-10ec9600-3569-11ea-9372-31e9a7832073.JPG)
+## Screenshots
 
+![main](https://user-images.githubusercontent.com/51857962/75746387-41350180-5d6e-11ea-92bf-6a52fe3a7f28.png) ![main-favorite](https://user-images.githubusercontent.com/51857962/75746404-4a25d300-5d6e-11ea-8a34-ce8a77e75582.png) ![main-reminder](https://user-images.githubusercontent.com/51857962/75746410-4db95a00-5d6e-11ea-8270-56a7d0f8f909.png)![note-edit](https://user-images.githubusercontent.com/51857962/75746432-5b6edf80-5d6e-11ea-9e0d-2c74e8af8d2f.png) ![date-picker](https://user-images.githubusercontent.com/51857962/75746439-5dd13980-5d6e-11ea-8fd8-70f42903ff37.png)![note-sample](https://user-images.githubusercontent.com/51857962/75746445-61fd5700-5d6e-11ea-9932-8f2edbc4eb93.png) ![reminder-page](https://user-images.githubusercontent.com/51857962/75746416-53af3b00-5d6e-11ea-9940-63885f352594.png) ![reminder-example](https://user-images.githubusercontent.com/51857962/75746570-cae4cf00-5d6e-11ea-95ed-4dfca38d54dc.png)
 
+## Language
 
-<h3><b>The following features and functions are used:</b></h3>
-<ul>
-<li>Material Design Interface: Basic add, modify, delete actions</li>
-<li>Filtering notes based on favorite flag</li>
-<li>Image attachement</li>
-<li>Note list</li>
-<li>Reminderlist</li>
-<li>Date selection</li>
-<li>Time selection</li>
-</ul>
+[Kotlin](https://kotlinlang.org/)
 
-<h3><b>Android development concepts used: </b></h3>
-<ul>
-<li>Koin (for Dependency Injection)</li>
-<li>MVVM</li>
-<li>Navigation Component</li>
-<li>Material design styling</li>
-<li>Kotlin Coroutines</li>
-<li>ViewModel</li>
-<li>LiveData</li>
-<li>Data binding: one & two way + Binding Adapters</li>
-<li>Room database</li>
-<li>Permissions</li>
-<li>Shared Preferences</li>
-<li>Glide & Picasso</li>
-<li>Implicit intent</li>
- <li>AlarmManager</li>
-<li>Fragment-to-Fragment communication (Callbacks) + Arguments</li>
-<li>ViewPager</li>
-<li>RecyclerView with DiffUtil</li>
-<li>Collapsing Toolbar</li>
-<li>State list drawable</li>
-<li>Date picker</li>
-<li>Alert Dialog</li>
-<li>SnackBar</li>
-<li>Option menu</li>
-<li>Downloadable Fonts</li>
- <li>Floating Action Button</li>
- </ul>
+## Features
 
+- Material Design Interface: Basic add, modify, delete actions
+- Filtering notes based on favorite flag
+- Image attachement
+- Note list
+- Reminderlist
+- Date selection
+- Time selection
 
+## Android development concepts
 
-<h4>Architecture Diagram: </h4>
+- MVVM
+- Navigation Component
+- Permissions
+- AlarmManager
+- ViewPager
+- RecyclerView with DiffUtil
+- Collapsing Toolbar
+- Dialogs
+- Fragment-to-Fragment communication (Callbacks)
+- Data binding: one & two way + Binding Adapters
 
-![architecture](https://user-images.githubusercontent.com/51857962/72215352-24e2c880-3566-11ea-8606-793a21df3f6c.JPG)
+## Libraries
 
-<h3>Screenshots: </h3>
+- [AndroidX](https://developer.android.com/jetpack/androidx/) - Previously known as 'Android support Library'
+- [Glide](https://github.com/bumptech/glide) - for loading and caching images
+- [Koin](https://insert-koin.io/) - for dependency injection
+- [Android Architecture Components](https://developer.android.com/topic/libraries/architecture/)
+  - [Room](https://developer.android.com/topic/libraries/architecture/room)
+  - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
+  - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata)
+  - [Data Binding](https://developer.android.com/topic/libraries/data-binding)
+- [Android Data Binding](https://developer.android.com/topic/libraries/data-binding/)
+- [Material Design](https://material.io/develop/)
+- [Navigation](https://developer.android.com/guide/navigation)
 
+## External Resources
 
- 
-![image](https://user-images.githubusercontent.com/51857962/72696073-08124a80-3b8f-11ea-862a-75dd12c376fb.png)![image](https://user-images.githubusercontent.com/51857962/72696114-27a97300-3b8f-11ea-9e02-ec2e3259c14b.png)![image](https://user-images.githubusercontent.com/51857962/72696142-43147e00-3b8f-11ea-81a4-10fd574c4fc4.png)![image](https://user-images.githubusercontent.com/51857962/72696165-59223e80-3b8f-11ea-924c-c73ee51a62f3.png)![image](https://user-images.githubusercontent.com/51857962/72696272-ad2d2300-3b8f-11ea-9e1e-20f1da37b106.png)![image](https://user-images.githubusercontent.com/51857962/72696336-dea5ee80-3b8f-11ea-81b7-7054974ddc79.png)![image](https://user-images.githubusercontent.com/51857962/72696352-f2515500-3b8f-11ea-8d27-49aef404df90.png)![image](https://user-images.githubusercontent.com/51857962/72696377-05642500-3b90-11ea-928f-f640d131025c.png)![image](https://user-images.githubusercontent.com/51857962/72696408-22005d00-3b90-11ea-98e3-bafab8b0103e.png)
-
-
-
-
-
-
-<h3>Resources: </h3>
-<ul>
-<li>https://developer.android.com</li>
-<li>https://commonsware.com/</li>
-<li>https://www.bignerdranch.com/books/android-programming-the-big-nerd-ranch-guide-4th/</li>
-<li>https://developer.android.com/courses/</li>
-<li>https://github.com/bumptech/glide</li>
-<li>https://square.github.io/picasso/</li>
-</ul>
+- [github/android](https://github.com/android/architecture-components-samples) - Proper use of Architecture Components
